@@ -1,5 +1,6 @@
 
 const $ = (element) => document.querySelector(element);
+const $$ = (element) => document.querySelectorAll(element);
 const toInt = (number) => parseInt(number.replace(/[^0-9]/g, ""))
 
 const ctrls = document.querySelector(".videoCtrlHide")
@@ -233,3 +234,13 @@ function genId() {
 genId()
 
 drag("디지털")
+
+function setcate() {
+  [...$$('.ctaegory div:not(:nth-child(1))')].forEach((e) => {
+    e.addEventListener('click', () => {
+      drag(e.textContent)
+    })
+  })
+}
+
+setcate()
