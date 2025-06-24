@@ -1,6 +1,6 @@
 
 const $ = (element) => document.querySelector(element);
-const $$ = (element) => document.querySelectorAll(element);
+const $$ = (element) => [...document.querySelectorAll(element)];
 const toInt = (number) => parseInt(number.replace(/[^0-9]/g, ""))
 
 const ctrls = document.querySelector(".videoCtrlHide")
@@ -62,28 +62,17 @@ if (localStorage.getItem("auto") == "true") {
 }
 
 
-const dropZone = $(".drop")
+let dropZone = $(".drop")
+let cateZone = $(".cateZone")
 
 
-async function drag(cate) {
-  await category(cate)
-  const dragItme = [...document.querySelectorAll(".cateZone .item")]
-
-  console.log(dragItme)
-
-  dragItme.forEach((e, idx) => {
-    e.setAttribute("draggable", true)
-    e.setAttribute("data-id", idx)
-
-
-    e.addEventListener("dragstart", (item) => {
-      item.dataTransfer.setData('text/html', e.outerHTML)
-    })
-
-
-  })
+function drag() {
 
   dropZone.addEventListener("dragover", (e) => {
+    e.preventDefault();
+  })
+
+  $("body").addEventListener("dragover", (e) => {
     e.preventDefault();
   })
 
@@ -97,7 +86,9 @@ async function drag(cate) {
     try {
       check = Array.from(dropZone.children).filter((e) => e.getAttribute("data-id") == newBox.querySelector('.item').getAttribute("data-id"));
 
-      if (!check.length >= 1) {
+
+
+      if (check.length === 0) {
 
         dropZone.insertAdjacentHTML('afterbegin', itemHTML);
         selectBox = $(`.drop [data-id="${newBox.querySelector('.item').getAttribute("data-id")}"]`)
@@ -109,13 +100,17 @@ async function drag(cate) {
     </div>`
       } else {
         selectBox = $(`.drop [data-id="${newBox.querySelector('.item').getAttribute("data-id")}"]`)
-        selectBox.querySelector('[type="number"]').value = parseInt(selectBox.querySelector('[type="number"]').value) + 1
+        selectBox.querySelector('[type="number"]').value = parseInt(parseInt(selectBox.querySelector('[type="number" ]').value)) + 1
+
 
         selectBox.querySelector('.countTotal').textContent = (toInt(selectBox.querySelector(".price").textContent) * toInt(selectBox.querySelector('[type="number"]').value)).toLocaleString("en-us")
 
 
       }
     } catch (error) {
+    } finally {
+      checkDrop()
+
     }
 
 
@@ -125,7 +120,36 @@ async function drag(cate) {
 
     priceTotal()
   })
+
+  $("body:not(.drop)").addEventListener("drop", (e) => {
+
+    if (!e.target.closest(".drop")) {
+      const delItem = e.dataTransfer.getData('text/plain')
+      console.log(delItem)
+      console.log($(`.drop .item[data-id="${delItem}"]`))
+    }
+
+
+  })
+
+
 }
+
+function checkDrop() {
+  const dataId = $$(".drop .item").map((e) => e.getAttribute("data-id"))
+
+
+  $$(".cateZone .item").forEach((e) => {
+    if (dataId.includes(e.getAttribute("data-id"))) {
+      e.style.opacity = 0.5
+    }
+
+  })
+
+
+
+}
+
 
 async function category(cate) {
   const box = $(".cateZone")
@@ -187,22 +211,25 @@ async function category(cate) {
 
         `
 
+
         }
       })
 
 
-    }).catch(error => {
-      console.error("Error fetching product data:", error);
-      throw error;
-    });
+
+
+    })
+
 
 }
 
 
 function priceTotal() {
+  dropZone = $(".drop");
   const total = document.querySelector(".total")
   let sum = 0;
   Array.from(dropZone.children).forEach((e) => {
+    // console.log(e.querySelector(".countTotal"))
     sum += parseInt(e.querySelector(".countTotal").innerText.replace(/[^0-9]/g, ""))
   })
 
@@ -211,14 +238,28 @@ function priceTotal() {
 
 function itemPrice() {
   dropZone.addEventListener("change", (e) => {
-    e.currentTarget.querySelector(".countTotal").textContent = (toInt(e.currentTarget.querySelector(".price").textContent) * toInt(e.target.value)).toLocaleString("en-us")
-    priceTotal()
-  })
+    if (e.target.type === "number" && e.target.closest(".item")) {
+      const itemElement = e.target.closest(".item");
+      const priceText = itemElement.querySelector(".price").textContent;
+      const quantityValue = e.target.value;
+
+      itemElement.querySelector(".countTotal").textContent =
+        (toInt(priceText) * toInt(quantityValue)).toLocaleString("en-us");
+      priceTotal();
+    }
+  });
 
   dropZone.addEventListener("input", (e) => {
-    e.currentTarget.querySelector(".countTotal").textContent = (toInt(e.currentTarget.querySelector(".price").textContent) * toInt(e.target.value)).toLocaleString("en-us")
-    priceTotal()
-  })
+    if (e.target.type === "number" && e.target.closest(".item")) {
+      const itemElement = e.target.closest(".item");
+      const priceText = itemElement.querySelector(".price").textContent;
+      const quantityValue = e.target.value;
+
+      itemElement.querySelector(".countTotal").textContent =
+        (toInt(priceText) * toInt(quantityValue)).toLocaleString("en-us");
+      priceTotal();
+    }
+  });
 }
 
 itemPrice()
@@ -233,14 +274,68 @@ function genId() {
 
 genId()
 
-drag("디지털")
+
+async function draggable(cate) {
+  await category(cate)
+  const dragItme = [...document.querySelectorAll(".cateZone .item")]
+  const dropDrag = $$(".drop .item")
+
+
+  dragItme.forEach((e, idx) => {
+    e.setAttribute("draggable", true)
+    e.setAttribute("data-id", cate + idx)
+
+
+    e.addEventListener("dragstart", (item) => {
+      item.dataTransfer.setData('text/html', e.outerHTML)
+      item.dataTransfer.setData('text/plain', e.closest(".item").getAttribute("data-id"))
+
+
+
+    })
+  })
+
+  dropDrag.forEach((e) => {
+    e.setAttribute("draggable", true)
+  })
+
+  checkDrop()
+
+
+}
+
 
 function setcate() {
   [...$$('.ctaegory div:not(:nth-child(1))')].forEach((e) => {
     e.addEventListener('click', () => {
-      drag(e.textContent)
+      draggable(e.textContent)
+
     })
   })
 }
 
+
+$(".noneUserBtn").addEventListener("click", () => {
+  $(".noneUser-cart").style.display = "flex"
+})
+
+$(".close").addEventListener("click", () => {
+  $(".noneUser-cart").style.display = "none"
+})
+
+$(".checkoutBtn").addEventListener("click", () => {
+  $(".userBuyAlert .id").textContent = $(".userId").textContent.replace(/[ㄱ-ㅎㅏ-ㅣ가-힣|:|\s]/g, "")
+  $(".userBuyAlert .buy").textContent = $(".total").textContent
+  $(".userBuyAlert").style.visibility = "visible"
+  $(".noneUser-cart").style.display = "none"
+  setTimeout(() => {
+
+    $(".userBuyAlert").style.visibility = "hidden"
+  }, 3000);
+})
+
+
+
 setcate()
+draggable("건강식품")
+drag('건강식품')

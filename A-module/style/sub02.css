@@ -224,20 +224,30 @@ label {
   border-radius: 10px;
 }
 
+
+
+.userBuyAlert {
+  position: fixed;
+  right: 50px;
+  top: 200px;
+  z-index: 100;
+  background-color: #ffc500;
+  padding: 20px;
+  border-radius: 10px;
+  font-weight: bold;
+  visibility: hidden;
+}
+
 .noneUser-cart .item {
   height: 350px;
   width: 270px;
   margin: 30px;
   cursor: pointer;
 }
-
-/* ./style/sub02.css 파일에 추가하세요. */
-.cateZone.drag-over-active {
-  border: 2px dashed #007bff; /* 파란색 점선 테두리 */
-  background-color: #f0f8ff; /* 연한 하늘색 배경 */
-  transition: border 0.2s ease-in-out, background-color 0.2s ease-in-out;
-}
-
 .drop {
   overflow: scroll;
+}
+
+.checkoutBtn {
+  cursor: pointer;
 }
