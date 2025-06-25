@@ -72,6 +72,11 @@ function drag() {
     e.preventDefault();
   })
 
+
+  dropZone.addEventListener("dragstart", (e) => {
+    e.dataTransfer.setData("text/plain", e.target.closest('.item').getAttribute("data-id"))
+  })
+
   $("body").addEventListener("dragover", (e) => {
     e.preventDefault();
   })
@@ -122,12 +127,15 @@ function drag() {
   })
 
   $("body:not(.drop)").addEventListener("drop", (e) => {
+    if (e.target.closest(".drop")) return;
 
-    if (!e.target.closest(".drop")) {
-      const delItem = e.dataTransfer.getData('text/plain')
-      console.log(delItem)
-      console.log($(`.drop .item[data-id="${delItem}"]`))
-    }
+    const delItem = e.dataTransfer.getData("text/plain")
+
+
+
+    $(`.drop .item[data-id='${delItem}']`).remove()
+
+    $(`.item[data-id='${delItem}']`).style.opacity = 1
 
 
   })
@@ -289,6 +297,7 @@ async function draggable(cate) {
     e.addEventListener("dragstart", (item) => {
       item.dataTransfer.setData('text/html', e.outerHTML)
       item.dataTransfer.setData('text/plain', e.closest(".item").getAttribute("data-id"))
+
 
 
 
