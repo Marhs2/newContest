@@ -1,0 +1,769 @@
+<?php require_once "db.php"; ?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="./style/sub02.css" />
+  <link rel="stylesheet" href="./style/main.css" />
+  <link
+    rel="stylesheet"
+    href="../asset/공통/fontawesome/css/font-awesome.min.css" />
+</head>
+
+<body>
+  <div class="userBuyAlert">
+    방금 비회원
+    <span class="id"></span>
+    님이
+    <span class="buy"></span>을 결제하셨습니다!
+  </div>
+
+  <div class="noneUser-cart">
+    <div class="cartContainer">
+      <div class="cartTitle">
+        <div class="userId">유저 아이디:</div>
+        <h1>장바구니</h1>
+        <div class="close">닫기</div>
+      </div>
+      <div class="drop-cart">
+        <div class="cart">
+          <div class="ctaegory">
+            <div id="cateTitle">카테고리</div>
+            <div class="cate01">건강식품</div>
+            <div class="cate02">디지털</div>
+            <div class="cate03">팬시</div>
+            <div class="cate04">향수</div>
+            <div class="cate05">헤어케어</div>
+          </div>
+          <div class="cateZone">
+            <div class="item">
+              <div class="img-cover">
+                <img src="../asset/A-Module/images/건강식품/1.PNG" alt="" />
+              </div>
+
+              <div class="item-content">
+                <div class="item-title">
+                  2상품명: 이뮨 멀티비타민&amp;미네랄1
+                </div>
+                <div class="item-about">
+                  <div class="item-price">
+                    가격:
+                    <span style="text-decoration: line-through">75,000</span>
+                    -&gt; <span class="price">65,000</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="img-cover">
+                <img src="../asset/A-Module/images/건강식품/1.PNG" alt="" />
+              </div>
+
+              <div class="item-content">
+                <div class="item-title">
+                  3상품명: 이뮨 멀티비타민&amp;미네랄2
+                </div>
+                <div class="item-about">
+                  <div class="item-price">
+                    가격:
+                    <span style="text-decoration: line-through">75,000</span>
+                    -&gt; <span class="price">65,000</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="img-cover">
+                <img src="../asset/A-Module/images/건강식품/1.PNG" alt="" />
+              </div>
+
+              <div class="item-content">
+                <div class="item-title">
+                  4상품명: 이뮨 멀티비타민&amp;미네랄3
+                </div>
+                <div class="item-about">
+                  <div class="item-price">
+                    가격:
+                    <span style="text-decoration: line-through">75,000</span>
+                    -&gt; <span class="price">65,000</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="img-cover">
+                <img src="../asset/A-Module/images/건강식품/1.PNG" alt="" />
+              </div>
+
+              <div class="item-content">
+                <div class="item-title">
+                  5상품명: 이뮨 멀티비타민&amp;미네랄4
+                </div>
+                <div class="item-about">
+                  <div class="item-price">
+                    가격:
+                    <span style="text-decoration: line-through">75,000</span>
+                    -&gt; <span class="price">65,000</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="img-cover">
+                <img src="../asset/A-Module/images/건강식품/1.PNG" alt="" />
+              </div>
+
+              <div class="item-content">
+                <div class="item-title">
+                  6상품명: 이뮨 멀티비타민&amp;미네랄5
+                </div>
+                <div class="item-about">
+                  <div class="item-price">
+                    가격:
+                    <span style="text-decoration: line-through">75,000</span>
+                    -&gt; <span class="price">65,000</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="img-cover">
+                <img src="../asset/A-Module/images/건강식품/1.PNG" alt="" />
+              </div>
+
+              <div class="item-content">
+                <div class="item-title">
+                  0상품명: 이뮨 멀티비타민&amp;미네랄6
+                </div>
+                <div class="item-about">
+                  <div class="item-price">
+                    가격:
+                    <span style="text-decoration: line-through">75,000</span>
+                    -&gt; <span class="price">65,000</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="drop"></div>
+      </div>
+      <div class="checkOut">
+        <div class="totalPrice">총 금액: <span class="total">0</span>원</div>
+        <div class="checkoutBtn">구매하기</div>
+      </div>
+    </div>
+  </div>
+  <header>
+    <a href="index.php"><img src="../images/logo.png" alt="logo" /></a>
+
+    <nav>
+      <ul class="nav01">
+        <li>
+          <a href="./sub01.php">소개</a>
+          <ul>
+            <li><a href="#">-</a></li>
+            <li><a href="#">-</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="./sub02.php">판매상품</a>
+          <ul>
+            <li><a href="./sub02.php">전체상품</a></li>
+            <li><a href="./sub03.php">인기상품</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="./sub03.php">가맹점</a>
+          <ul>
+            <li><a href="#">-</a></li>
+            <li><a href="#">-</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="./sub04.php">장바구니</a>
+          <ul>
+            <li><a href="#">-</a></li>
+            <li><a href="#">-</a></li>
+          </ul>
+        </li>
+      </ul>
+      <?php if (isset($_SESSION["ss"]->isAdmin) === 1) { ?>
+        <ul class="nav02">
+          <li><a href="#" class="login"><?= $_SESSION["ss"]->id ?></a></li>
+          <li><a href="#" onclick="logout()" class="logout">로그아웃</a></li>
+          <li><a href="#">장바구니</a></li>
+          <li><a href="#">관리자</a></li>
+        </ul>
+      <?php } else if (isset($_SESSION["ss"])) { ?>
+        <ul class="nav02">
+          <li><a href="#" class="login">로그인</a></li>
+          <li><a href="#" class="signup">회원가입</a></li>
+          <li><a href="#">장바구니</a></li>
+        </ul>
+      <?php } else { ?>
+        <ul class="nav02">
+          <li><a href="#" class="login">로그인</a></li>
+          <li><a href="#" class="signup">회원가입</a></li>
+          <li><a href="#">장바구니</a></li>
+        </ul>
+      <?php } ?>
+
+    </nav>
+  </header>
+  <main>
+    <div class="all-container">
+      <div class="video">
+        <video src="../asset/B-Module/AD.mp4"></video>
+
+        <div class="videoCtrlHide">
+          <div class="videoCtrl">
+            <div class="ctrl01">재생</div>
+            <div class="ctrl02">일시정지</div>
+            <div class="ctrl03">정지</div>
+            <div class="ctrl04">되감기(10초씩)</div>
+            <div class="ctrl05">빨리감기(10초씩)</div>
+            <div class="ctrl06">감속하기(0.1배씩)</div>
+            <div class="ctrl07">배속하기(0.1배씩)</div>
+            <div class="ctrl08">배속 원래대로 돌리기</div>
+            <div class="ctrl09">
+              <input type="checkbox" id="loop" />
+              <label for="loop">반복 켜기 / 끄기</label>
+            </div>
+            <div class="ctrl10">
+              <input type="checkbox" id="auto" />
+              <label for="auto">자동재생 켜기 / 끄기</label>
+            </div>
+          </div>
+          <div class="ctrl11">
+            <input type="checkbox" id="hide" />
+            <label for="hide">컨트롤러 보이기 / 숨기기</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="title">ALL PRODCUTS</div>
+      <div class="prodcuts-container">
+        <div class="items">
+          <div class="item">
+            <div class="img-cover">
+              <img src="../asset/A-Module/images/건강식품/1.PNG" alt="" />
+            </div>
+
+            <div class="item-content">
+
+              <div class="item-title">상품명: 이뮨 멀티비타민&amp;미네랄</div>
+              <div class="item-about">
+                <div class="item-price">
+                  가격:
+                  <span style="text-decoration: line-through">75,000</span>
+                  -&gt; <span class="price">65,000</span>
+                </div>
+                <div class="item-btn">
+                  <a href="#">구매하기</a>
+                  <span>장바구니담기</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <div class="img-cover">
+              <img src="../asset/A-Module/images/건강식품/2.PNG" alt="" />
+            </div>
+
+            <div class="item-content">
+              <div class="item-title">상품명: 센트룸</div>
+              <div class="item-about">
+                <div class="item-price">가격: <span>27,000</span></div>
+                <div class="item-btn">
+                  <a href="#">구매하기</a>
+                  <span>장바구니담기</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <div class="img-cover">
+              <img src="../asset/A-Module/images/건강식품/3.PNG" alt="" />
+            </div>
+
+            <div class="item-content">
+              <div class="item-title">상품명: 닥터브라이언</div>
+              <div class="item-about">
+                <div class="item-price">가격: <span>2,000</span></div>
+                <div class="item-btn">
+                  <a href="#">구매하기</a>
+                  <span>장바구니담기</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <div class="img-cover">
+              <img src="../asset/A-Module/images/건강식품/4.PNG" alt="" />
+            </div>
+
+            <div class="item-content">
+              <div class="item-title">상품명: 액티브 멀티포맨</div>
+              <div class="item-about">
+                <div class="item-price">가격: <span>30,000</span></div>
+                <div class="item-btn">
+                  <a href="#">구매하기</a>
+                  <span>장바구니담기</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <div class="img-cover">
+              <img src="../asset/A-Module/images/건강식품/5.PNG" alt="" />
+            </div>
+
+            <div class="item-content">
+              <div class="item-title">상품명: 네이처메이드B12</div>
+              <div class="item-about">
+                <div class="item-price">가격: <span>30,000</span></div>
+                <div class="item-btn">
+                  <a href="#">구매하기</a>
+                  <span>장바구니담기</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="items">
+          <div class="item">
+            <div class="img-cover">
+              <img src="../asset/A-Module/images/디지털/4.PNG" alt="" />
+            </div>
+
+            <div class="item-content">
+              <div class="item-title">
+                상품명: 파이널마우스 스타라이트12 페가수스 미디엄
+              </div>
+              <div class="item-about">
+                <div class="item-price" style="font-size: 16px">
+                  가격:
+                  <span style="text-decoration: line-through">1,254,000</span>
+                  -&gt; <span class="price">1,128,600</span>
+                </div>
+                <div class="item-btn">
+                  <a href="#">구매하기</a>
+                  <span>장바구니담기</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="img-cover">
+              <img src="../asset/A-Module/images/디지털/1.PNG" alt="" />
+            </div>
+
+            <div class="item-content">
+              <div class="item-title">상품명: PANTONE PD충전 보조배터리</div>
+              <div class="item-about">
+                <div class="item-price">가격: <span>24,400</span></div>
+                <div class="item-btn">
+                  <a href="#">구매하기</a>
+                  <span>장바구니담기</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <div class="img-cover">
+              <img src="../asset/A-Module/images/디지털/2.PNG" alt="" />
+            </div>
+
+            <div class="item-content">
+              <div class="item-title">
+                상품명: Bowie D05 무선 블루투스 5.3 헤드셋
+              </div>
+              <div class="item-about">
+                <div class="item-price">가격: <span>36,900</span></div>
+                <div class="item-btn">
+                  <a href="#">구매하기</a>
+                  <span>장바구니담기</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <div class="img-cover">
+              <img src="../asset/A-Module/images/디지털/3.PNG" alt="" />
+            </div>
+
+            <div class="item-content">
+              <div class="item-title">상품명: 독거미 F99 기계식 키보드</div>
+              <div class="item-about">
+                <div class="item-price">가격: <span>70,750</span></div>
+                <div class="item-btn">
+                  <a href="#">구매하기</a>
+                  <span>장바구니담기</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="img-cover">
+              <img src="../asset/A-Module/images/디지털/5.PNG" alt="" />
+            </div>
+
+            <div class="item-content">
+              <div class="item-title">상품명: 보이저5200 블루투스 이어폰</div>
+              <div class="item-about">
+                <div class="item-price">가격: <span>146,000</span></div>
+                <div class="item-btn">
+                  <a href="#">구매하기</a>
+                  <span>장바구니담기</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="items">
+          <div class="item">
+            <div class="img-cover">
+              <img src="../asset/A-Module/images/팬시/4.PNG" alt="" />
+            </div>
+
+            <div class="item-content">
+              <div class="item-title">상품명: 게이밍 이어폰 VJJB NI</div>
+              <div class="item-about">
+                <div class="item-price">
+                  가격:
+                  <span style="text-decoration: line-through">38,900</span>
+                  -&gt; <span class="price">28,900</span>
+                </div>
+                <div class="item-btn">
+                  <a href="#">구매하기</a>
+                  <span>장바구니담기</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="img-cover">
+              <img src="../asset/A-Module/images/팬시/1.PNG" alt="" />
+            </div>
+
+            <div class="item-content">
+              <div class="item-title">상품명: 명품 자동 장우산</div>
+              <div class="item-about">
+                <div class="item-price">가격: <span>31,600</span></div>
+                <div class="item-btn">
+                  <a href="#">구매하기</a>
+                  <span>장바구니담기</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <div class="img-cover">
+              <img src="../asset/A-Module/images/팬시/2.PNG" alt="" />
+            </div>
+
+            <div class="item-content">
+              <div class="item-title">
+                상품명: 14K 윙블링 원터치 링 귀걸이(주문제작)
+              </div>
+              <div class="item-about">
+                <div class="item-price">가격: <span>250,000</span></div>
+                <div class="item-btn">
+                  <a href="#">구매하기</a>
+                  <span>장바구니담기</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <div class="img-cover">
+              <img src="../asset/A-Module/images/팬시/3.PNG" alt="" />
+            </div>
+
+            <div class="item-content">
+              <div class="item-title">
+                상품명: 14K 윙블링 메르시 목걸이(주문제작)
+              </div>
+              <div class="item-about">
+                <div class="item-price">가격: <span>265,000</span></div>
+                <div class="item-btn">
+                  <a href="#">구매하기</a>
+                  <span>장바구니담기</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="img-cover">
+              <img src="../asset/A-Module/images/팬시/5.PNG" alt="" />
+            </div>
+
+            <div class="item-content">
+              <div class="item-title">상품명: 인스탁스 미니 에보</div>
+              <div class="item-about">
+                <div class="item-price">가격: <span>320,000</span></div>
+                <div class="item-btn">
+                  <a href="#">구매하기</a>
+                  <span>장바구니담기</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="items">
+          <div class="item">
+            <div class="img-cover">
+              <img src="../asset/A-Module/images/향수/4.PNG" alt="" />
+            </div>
+
+            <div class="item-content">
+              <div class="item-title">상품명: 몽블랑 익스플로러 EDP 60ml</div>
+              <div class="item-about">
+                <div class="item-price">
+                  가격:
+                  <span style="text-decoration: line-through">103,000</span>
+                  -&gt; <span class="price">93,000</span>
+                </div>
+                <div class="item-btn">
+                  <a href="#">구매하기</a>
+                  <span>장바구니담기</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="img-cover">
+              <img src="../asset/A-Module/images/향수/1.PNG" alt="" />
+            </div>
+
+            <div class="item-content">
+              <div class="item-title">상품명: 에스쁘아 솔리드 퍼퓸 4.2g</div>
+              <div class="item-about">
+                <div class="item-price">가격: <span>26,000</span></div>
+                <div class="item-btn">
+                  <a href="#">구매하기</a>
+                  <span>장바구니담기</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <div class="img-cover">
+              <img src="../asset/A-Module/images/향수/2.PNG" alt="" />
+            </div>
+
+            <div class="item-content">
+              <div class="item-title">
+                상품명: 호텔도슨 향수 오드퍼퓸 75ml
+              </div>
+              <div class="item-about">
+                <div class="item-price">가격: <span>153,000</span></div>
+                <div class="item-btn">
+                  <a href="#">구매하기</a>
+                  <span>장바구니담기</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <div class="img-cover">
+              <img src="../asset/A-Module/images/향수/3.PNG" alt="" />
+            </div>
+
+            <div class="item-content">
+              <div class="item-title">상품명: 랑방 레 플레르 EDT 90ml</div>
+              <div class="item-about">
+                <div class="item-price">가격: <span>64,500</span></div>
+                <div class="item-btn">
+                  <a href="#">구매하기</a>
+                  <span>장바구니담기</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="img-cover">
+              <img src="../asset/A-Module/images/향수/5.PNG" alt="" />
+            </div>
+
+            <div class="item-content">
+              <div class="item-title">상품명: 캘빈클라인 One EDT 50ml</div>
+              <div class="item-about">
+                <div class="item-price">가격: <span>58,900</span></div>
+                <div class="item-btn">
+                  <a href="#">구매하기</a>
+                  <span>장바구니담기</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="items">
+          <div class="item">
+            <div class="img-cover">
+              <img src="../asset/A-Module/images/헤어케어/5.PNG" alt="" />
+            </div>
+
+            <div class="item-content">
+              <div class="item-title">
+                상품명: 닥터포헤어 피토프레시 헤어쿨링 스프레이 150ml
+              </div>
+              <div class="item-about">
+                <div class="item-price">
+                  가격:
+                  <span style="text-decoration: line-through">16,000</span>
+                  -&gt; <span class="price">14,400</span>
+                </div>
+                <div class="item-btn">
+                  <a href="#">구매하기</a>
+                  <span>장바구니담기</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="img-cover">
+              <img src="../asset/A-Module/images/헤어케어/1.PNG" alt="" />
+            </div>
+
+            <div class="item-content">
+              <div class="item-title">
+                상품명: 어노브 딥 데미지 트리트먼트 EX 더블
+              </div>
+              <div class="item-about">
+                <div class="item-price">가격: <span>29,800</span></div>
+                <div class="item-btn">
+                  <a href="#">구매하기</a>
+                  <span>장바구니담기</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <div class="img-cover">
+              <img src="../asset/A-Module/images/헤어케어/2.PNG" alt="" />
+            </div>
+
+            <div class="item-content">
+              <div class="item-title">
+                상품명: 려 루트젠 여성맞춤 볼륨 탈모증상케어 샴퓨 353ml
+              </div>
+              <div class="item-about">
+                <div class="item-price">가격: <span>21,900</span></div>
+                <div class="item-btn">
+                  <a href="#">구매하기</a>
+                  <span>장바구니담기</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <div class="img-cover">
+              <img src="../asset/A-Module/images/헤어케어/3.PNG" alt="" />
+            </div>
+
+            <div class="item-content">
+              <div class="item-title">
+                상품명: 라보에이치 두피쿨링&amp;노세범 샴푸 333ml
+              </div>
+              <div class="item-about">
+                <div class="item-price">가격: <span>19,800</span></div>
+                <div class="item-btn">
+                  <a href="#">구매하기</a>
+                  <span>장바구니담기</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <div class="img-cover">
+              <img src="../asset/A-Module/images/헤어케어/4.PNG" alt="" />
+            </div>
+
+            <div class="item-content">
+              <div class="item-title">
+                상품명: 모로칸오일 헤어트리트먼트 100ml
+              </div>
+              <div class="item-about">
+                <div class="item-price">가격: <span>52,200</span></div>
+                <div class="item-btn">
+                  <a href="#">구매하기</a>
+                  <span>장바구니담기</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="noneUserBtn">비회원주문</div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="contact-nav">
+      <div class="contact">
+        <div class="contac">
+          고객센터 이용안내 - 온라인몰 고객센터 1580-8282 - 매장고객센터
+          1577-8254
+        </div>
+        <div class="contac">고객센터 운영시간 [평일 09:00 - 18:00]</div>
+        <div class="contac">
+          주말 및 공휴일은 1:1문의하기를 이용해주세요. 업무가 시작되면 바로
+          처리해드립니다.
+        </div>
+      </div>
+
+      <div class="footerNav">
+        <a href="#"><img src="../images/logo.png" alt="footerLogo" /></a>
+        <div class="footerNavMain">
+          <a href="#">개인정보처리방침</a> |
+          <a href="#">이용약관.법적고지</a> | <a href="#">청소년보호방침</a> |
+          <a href="#">이메일무단수집거부</a> | <a href="#">사이트맵</a> |
+          <a href="#">채용</a>
+        </div>
+
+        <div class="footerNavSns">
+          <div class="fa fa-twitter"></div>
+          <div class="fa fa-twitch"></div>
+          <div class="fa fa-whatsapp"></div>
+          <div class="fa fa-youtube-play"></div>
+          <div class="fa fa-facebook"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="who-safe">
+      <div class="who">
+        (주)GIFTS:Mall | 사업자등록번호 : 809-81-01157 | 대표이사 황기영 주소
+        : 서울특별시 용산구 한강대로 123, 40층 본사 대표전화 : 02-123-4567 |
+        GIFTS:Mall 가맹상담전화 : 02-123-4568
+      </div>
+
+      <div class="safe">
+        지방은행구매안전서비스 GIFTS:Mall은 현금 결제한 금액에 대해 지방은행과
+        채무지급보증 계약을체결하여 안전한 거래를 보장하고 있습니다 서비스
+        가입사실 확인 &gt;
+      </div>
+
+      <div class="copy">
+        COPYRIGHTⓒ 2024 GIFTS:MALL KOREA INC. ALL RIGHTS RESERVED
+      </div>
+    </div>
+  </footer>
+  <script src="./script/sub02.js"></script>
+</body>
+
+</html>

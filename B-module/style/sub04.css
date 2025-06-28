@@ -1,0 +1,36 @@
+.cart {
+  border: 1px dotted black;
+  margin: 10px;
+  display: flex;
+  justify-content: start;
+}
+
+.checkout {
+  height: 100px;
+  background-color: #ffc500;
+  margin: 10px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.checkoutBtn {
+  width: 300px;
+  height: 80px;
+  background-color: white;
+  font-weight: bold;
+  font-size: 40px;
+  line-height: 80px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.checkout div:nth-child(1){
+  font-weight: bold;
+  font-size: 40px;
+}
+
+.item {
+  margin: 30px;
+}
