@@ -2,7 +2,7 @@
 require_once "db.php";
 
 
-if ($_GET["img"]) {
+if ($_GET["img"] ?? false) {
   $img = $_GET["img"];
   $product = DB::fetch("select * from prodcut where img = '$img'");
 } else {
@@ -31,6 +31,8 @@ if ($_GET["img"]) {
   <link rel="stylesheet" href="./style/main.css">
   <link rel="stylesheet" href="./style/sub02.css">
   <link rel="stylesheet" href="./style/noticeAdmin.css">
+    <link rel="stylesheet" href="./style/prodcutAdmin.css">
+
   <link rel="stylesheet" href="../asset/공통/fontawesome/css/font-awesome.min.css">
 
 </head>
@@ -167,7 +169,7 @@ if ($_GET["img"]) {
       <?php } ?>
 
       <div class="item-imgUpload">
-        <?php if (isset($product->img)) { ?>
+        <?php if (isset($product->img) && $product->img != null) { ?>
           <img src="../asset/A-Module/images/else/<?= $product->img ?>" alt="<?= $product->cate ?><?= $product->itemNum ?>Img" id="imgPreview">
         <?php } else { ?>
           <img src="../asset/A-Module/images/<?= $product->cate ?>/<?= $product->itemNum ?>.PNG" alt="<?= $product->cate ?><?= $product->itemNum ?>Img" id="imgPreview">

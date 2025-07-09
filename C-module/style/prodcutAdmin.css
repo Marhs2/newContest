@@ -1,0 +1,80 @@
+.edit {
+  padding: 30px;
+  margin: 40px auto;
+  background-color: #ffffff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.edit form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+.item-title input[type="text"],
+.item-des input[type="text"],
+.item-price input[type="text"],
+.item-title select[name="cate"] {
+  width: calc(100% - 22px);
+  padding: 12px;
+  border: 1px solid #dddddd;
+  background-color: #ffffff;
+  color: #333333;
+  font-size: 1.1em;
+  border-radius: 5px;
+}
+.item-imgUpload img {
+  width: 300px;
+  height: 400px;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin: 5px;
+}
+
+.item-title select[name="cate"] {
+  appearance: none;
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 12px;
+}
+
+.discount {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 0;
+  border-radius: 4px;
+}
+
+.discount input[type="radio"] {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.discount label {
+  font-weight: normal;
+  color: #555555;
+  cursor: pointer;
+}
+
+.edit form input[type="submit"] {
+  background-color: #ffc500;
+  color: white;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-top: 30px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+main.edit {
+  min-height: 70vh;
+}

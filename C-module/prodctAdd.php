@@ -2,9 +2,6 @@
 require_once "db.php";
 
 
-$notice = DB::fetchAll("select * from prodcut");
-
-print_r(DB::fetchAll("select cate, count(*) from prodcut group by cate"));
 
 ?>
 
@@ -20,6 +17,7 @@ print_r(DB::fetchAll("select cate, count(*) from prodcut group by cate"));
   <link rel="stylesheet" href="./style/main.css">
   <link rel="stylesheet" href="./style/sub02.css">
   <link rel="stylesheet" href="./style/noticeAdmin.css">
+  <link rel="stylesheet" href="./style/prodcutAdmin.css">
   <link rel="stylesheet" href="../asset/공통/fontawesome/css/font-awesome.min.css">
 
 </head>
@@ -141,89 +139,57 @@ print_r(DB::fetchAll("select cate, count(*) from prodcut group by cate"));
 
     </nav>
   </header>
-  <div class="prodcuts-container">
 
 
+  <main class="edit">
 
-    <?php
-    $counter = 0;
+    <form method="post" action="prodctEdit_removeAction.php?isAdd=add" enctype="multipart/form-data">
 
-    foreach ($notice as $key => $value) {
-      if ($value->discount == "1") {
-        $discount = $value->price - 10000;
-      } else if ($value->discount == "2") {
-        $discount = $value->price  * 0.90;
-      } else if ($value->discount == "3") {
-        $discount = $value->price  * 0.70;
-      } else {
-        $discount = $value->discount;
-      }
-
-      if ($counter % 5 === 0) {
-        if ($counter > 0) {
-          echo '</div>';
-        }
-        echo '<div class="items">';
-      }
-    ?>
-
-      <div class="item" data-cate="디지털" data-idx="1">
-        <?php if (isset($value->img) && $value->img != null) { ?>
-          <input type="hidden" name="type" value="img">
-          <input type="hidden" name="typeName" value="<?= $value->img ?>">
-        <?php } else { ?>
-          <input type="hidden" name="type" value="cate">
-          <input type="hidden" name="typeName" value="<?= $value->cate ?>">
-          <input type="hidden" name="typeNum" value="<?= $value->itemNum ?>">
-        <?php } ?>
-        <div class="img-cover">
-          <?php if (isset($value->img) && $value->img != null) { ?>
-            <img src="../asset/A-Module/images/else/<?= $value->img ?>" alt="<?= $value->cate ?><?= $value->itemNum ?>Img">
-          <?php } else { ?>
-            <img src="../asset/A-Module/images/<?= $value->cate ?>/<?= $value->itemNum ?>.PNG" alt="<?= $value->cate ?><?= $value->itemNum ?>Img">
-          <?php } ?>
-        </div>
-
-        <div class="item-content">
-          <div class="item-title"><?= $value->title ?></div>
-          <div class="item-about">
-
-            <?php if ($value->discount == "0") { ?>
-              <div class="item-price">가격: <span><?= $value->price ?></span></div>
-            <?php } else { ?>
-              <div class="item-price"><span style="text-decoration: line-through;"><?= $value->price ?></span> -> <span class="discount"><?= $discount ?></span> </div>
-            <?php } ?>
-
-            <div class="item-des"><?= $value->des ?></div>
-            <div class="item-btn">
-              <span onclick="delProdcut('<?= $value->cate ?>','<?= $value->itemNum ?>')">삭제</span>
-              <?php if (isset($value->img) && $value->img  != null) { ?>
-                <a href="./prodctEdit_remove.php?img=<?= $value->img ?>">수정</a>
-              <?php } else { ?>
-                <a href="./prodctEdit_remove.php?cate=<?= $value->cate ?>&idx=<?= $value->itemNum ?>">수정</a>
-              <?php } ?>
-            </div>
-          </div>
-        </div>
+      <div class="item-imgUpload">
+        <img src="#" alt="" id="imgPreview">
+        <input type="file" name="img" accept="image/*">
       </div>
 
-    <?php
-      $counter++;
-    }
 
-    if ($counter > 0) {
-      echo '</div>';
-    }
-    ?>
-
-
-
-    <!-- <td><a href="./noticeEdit_Add.php?idx=<?= $value->idx ?>&type=edit">수정</a> </td>
-      <td class="del" onclick="del(this)">삭제</td> -->
+      <div class="item-title">
+        <input type="text" name="title" placeholder="제목">
+      </div>
+      <div class="item-des">
+        <input type="text" name="des" placeholder="설명">
+      </div>
+      <div class="item-price">
+        <input type="text" name="price" placeholder="가격">
+      </div>
 
 
-  </div>
-  <div class="add" onclick="productAdd()">추가</div>
+      <div class="item-title">
+        <select name="cate">
+          <option value="건강식품">건강식품</option>
+          <option value="디지털">디지털</option>
+          <option value="팬시">팬시</option>
+          <option value="향수">향수</option>
+          <option value="헤어케어">헤어케어</option>
+        </select>
+      </div>
+
+      <div class="discount">
+        <input type="radio" name="discount" id="won" value="1">
+        <label for="won">만원할인</label>
+        <input type="radio" name="discount" id="ten" value="2">
+        <label for="ten">10% 할인</label>
+        <input type="radio" name="discount" id="three" value="3">
+        <label for="three">30% 할인</label>
+      </div>
+      <div>
+        <input type="submit" value="추가" onclick="add()">
+      </div>
+    </form>
+
+  </main>
+
+
+
+
 
   <footer>
     <div class="contact-nav">
