@@ -2,7 +2,7 @@
 require_once "db.php";
 require_once "lib.php";
 
-$type = $_GET["type"];
+$type = $_GET["type"] || "";
 
 if ($type == "logout") {
   echo "로그아웃입니다";

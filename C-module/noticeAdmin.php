@@ -1,25 +1,8 @@
-<?php require_once "db.php";
+<?php
+require_once "db.php";
 
 
-
-if (isset($_SESSION["ss"]->id) || isset($_SESSION["ss"])) {
-  $userId = $_SESSION["ss"]->id;
-  if (!DB::fetch("show tables like '$userId'")) {
-    DB::exec("create table `" . $userId . "`(
-    idx int AUTO_INCREMENT PRIMARY KEY,
-    item_id varchar(20) not null,
-    item_cate varchar(20) not null,
-    count int not null,
-    price int not null,
-    discount int not null,
-    title varchar(100) not null
-)");
-  } else {
-    $carts = DB::fetchAll("select * from `" . $userId . "` ");
-  }
-}
-
-
+$notice = DB::fetchAll("select * from notice");
 
 ?>
 
@@ -27,18 +10,72 @@ if (isset($_SESSION["ss"]->id) || isset($_SESSION["ss"])) {
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="./style/sub02.css" />
-  <link rel="stylesheet" href="./style/sub04.css" />
-  <link rel="stylesheet" href="./style/main.css" />
-  <link
-    rel="stylesheet"
-    href="../asset/공통/fontawesome/css/font-awesome.min.css" />
+
+
+  <link rel="stylesheet" href="./style/main.css">
+  <link rel="stylesheet" href="./style/noticeAdmin.css">
+  <link rel="stylesheet" href="../asset/공통/fontawesome/css/font-awesome.min.css">
+
 </head>
 
 <body>
+  <div class="signupLayer">
+
+    <div>
+      <span class="closesignup">닫기</span>
+      <form action="singupAction.php" method="post">
+        <table>
+          <tr>
+            <td><label for="id">아이디</label> <input type="text" name="id" id="id" required></td>
+          </tr>
+          <tr>
+            <td><label for="psw">비밀번호</label> <input type="password" name="psw" id="psw" required></td>
+          </tr>
+          <tr>
+            <td><label for="name">이름</label> <input type="text" name="name" id="name" required></td>
+          </tr>
+          <tr>
+            <td><label for="email">이메일</label> <input type="email" name="email" id="email" required></td>
+          </tr>
+          <tr>
+            <td><input type="submit" value="회원가입"></td>
+          </tr>
+        </table>
+      </form>
+    </div>
+
+
+  </div>
+
+
+
+  <div class="loginLayer">
+
+    <div>
+      <span class="closeLogin">닫기</span>
+      <form action="loginAction.php" method="post">
+        <table>
+          <tr>
+            <td><label for="id">아이디</label> <input type="text" name="loginId" id="id" required></td>
+          </tr>
+          <tr>
+            <td><label for="psw">비밀번호</label> <input type="password" name="loginPsw" id="psw" required></td>
+          </tr>
+
+          <tr>
+            <td><input type="submit" value="회원가입"></td>
+          </tr>
+        </table>
+      </form>
+    </div>
+
+  </div>
+
+
+
   <header>
     <a href="index.php"><img src="../images/logo.png" alt="logo" /></a>
 
@@ -78,7 +115,12 @@ if (isset($_SESSION["ss"]->id) || isset($_SESSION["ss"])) {
           <li><a href="#" class="login"><?= $_SESSION["ss"]->id ?></a></li>
           <li><a href="#" onclick="logout()" class="logout">로그아웃</a></li>
           <li><a href="#">장바구니</a></li>
-          <li><a href="#">관리자</a></li>
+          <li><a href="#">관리자</a>
+            <ul>
+              <li><a href="./noticeAdmin.php">공지사항관리</a></li>
+              <li><a href="./prodcutAdmin.php">판매상품관리</a></li>
+            </ul>
+          </li>
         </ul>
       <?php } else if (isset($_SESSION["ss"])) { ?>
         <ul class="nav02">
@@ -97,67 +139,37 @@ if (isset($_SESSION["ss"]->id) || isset($_SESSION["ss"])) {
     </nav>
   </header>
 
-  <main>
-    <div class="all-container">
-      <div class="title">CART</div>
+  <table border="2" scope="col" class="noticeContainer">
+    <thead>
+      <tr>
+        <th>종류</th>
+        <th>제목</th>
+        <th>날짜</th>
+      </tr>
 
-      <div class="cart">
-        <?php if (isset($_SESSION["ss"]->id) || isset($_SESSION["ss"])) { ?>
-          <?php foreach ($carts as $e) { ?>
-            <?php if ($e->discount == "0") { ?>
-              <div class="item" data-cate="<?= $e->item_cate ?>" data-id="<?= $e->item_id ?>">
-                <div class="img-cover">
-                  <img src="../asset/A-Module/images/<?= $e->item_cate ?>/<?= $e->item_id ?>.PNG" alt="<?php $e->item_cate ?><?= $e->item_id ?>Img">
-                </div>
+    </thead>
 
-                <div class="item-content">
-                  <div class="item-title"><?= $e->title ?></div>
-                  <div class="item-about">
+    <tbody>
+      <?php foreach ($notice as $value) { ?>
+        <tr class="notice" data-id="<?= $value->idx ?>">
+          <td><?= $value->type ?> </td>
+          <td><?= $value->title ?></td>
+          <td><?= $value->date ?></td>
+          <td><a href="./noticeEdit_Add.php?idx=<?= $value->idx ?>&type=edit">수정</a> </td>
+          <td class="del" onclick="del(this)">삭제</td>
 
-                    <div class="item-price">가격: <span><?= $e->price ?></span></div>
-                    <div class="itemCount">
-                      <input type="number" value="<?= $e->count ?>" min="1">
-                      <div>가격: <span class="countTotal"><?= $e->price ?></span>원</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-            <?php } else { ?>
-              <div class="item" data-cate="<?= $e->item_cate ?>" data-id="<?= $e->item_id ?>">
-                <div class="img-cover">
-                  <img src="../asset/A-Module/images/<?= $e->item_cate ?>/<?= $e->item_id ?>.PNG" alt="<?php $e->item_cate ?><?= $e->item_id ?>Img">
-                </div>
-
-                <div class="item-content">
-                  <div class="item-title"><?= $e->title ?></div>
-                  <div class="item-about">
-
-                    <div class="item-price">가격: <span style="text-decoration: line-through;"><?= $e->price ?></span> -&gt; <span class="discount"><?= $e->discount ?></span> </div>
-                    <div class="itemCount">
-                      <input type="number" value="<?= $e->count ?>" min="1">
-                      <div>가격: <span class="countTotal"><?= $e->discount ?></span>원</div>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            <?php } ?>
-
-          <?php } ?>
-
-        <?php } ?>
+        </tr>
+      <?php } ?>
+    </tbody>
 
 
+    <tfoot>
+      <tr>
+        <th colspan="5"><a href=./noticeEdit_Add.php?type=add">추가하기</a></th>
+      </tr>
+    </tfoot>
 
-
-      </div>
-      <div class="checkout">
-        <div>총 가격: <span class="total"></span></div>
-        <div class="checkoutBtn">구매</div>
-      </div>
-    </div>
-  </main>
+  </table>
 
   <footer>
     <div class="contact-nav">
@@ -166,7 +178,9 @@ if (isset($_SESSION["ss"]->id) || isset($_SESSION["ss"])) {
           고객센터 이용안내 - 온라인몰 고객센터 1580-8282 - 매장고객센터
           1577-8254
         </div>
-        <div class="contac">고객센터 운영시간 [평일 09:00 - 18:00]</div>
+        <div class="contac">
+          고객센터 운영시간 [평일 09:00 - 18:00]
+        </div>
         <div class="contac">
           주말 및 공휴일은 1:1문의하기를 이용해주세요. 업무가 시작되면 바로
           처리해드립니다.
@@ -210,7 +224,9 @@ if (isset($_SESSION["ss"]->id) || isset($_SESSION["ss"])) {
       </div>
     </div>
   </footer>
-  <script src="./script/sub04.js"></script>
+  <script src="./script/admin.js"></script>
+
+
 </body>
 
 </html>

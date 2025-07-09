@@ -60,7 +60,8 @@ nav > ul ul a {
   opacity: 0;
 }
 
-.nav01:hover ul a {
+.nav01:hover ul a,
+.nav02 li:hover ul a {
   height: 50px;
   opacity: 1;
 }

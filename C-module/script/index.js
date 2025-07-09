@@ -6,22 +6,25 @@ const $closelogin = document.querySelector(".closeLogin");
 const $openlogin = document.querySelector(".login");
 const $loginLayer = document.querySelector(".loginLayer");
 
-// $closelogin.addEventListener("click", () => {
-//   $loginLayer.style.display = 'none'
-// });
+if ($opensignup && $openlogin) {
 
-// $openlogin.addEventListener("click", () => {
-//   $loginLayer.style.display = 'flex'
-// })
+  $closelogin.addEventListener("click", () => {
+    $loginLayer.style.display = 'none'
+  });
 
-// $closesignup.addEventListener("click", () => {
-//   $signupLayer.style.display = 'none'
-// });
+  $openlogin.addEventListener("click", () => {
+    $loginLayer.style.display = 'flex'
+  })
 
-// $opensignup.addEventListener("click", () => {
-//   $signupLayer.style.display = 'flex'
-// })
+  $closesignup.addEventListener("click", () => {
+    $signupLayer.style.display = 'none'
+  });
 
+  $opensignup.addEventListener("click", () => {
+    $signupLayer.style.display = 'flex'
+  })
+
+}
 
 function logout() {
   location.href = "loginAction.php?type=logout";
@@ -36,21 +39,23 @@ function noticeSlide() {
   const lBtn = document.querySelector(".notice-left")
   const rBtn = document.querySelector(".notice-right")
   const nMove = document.querySelector(".notice-slide >li")
+  const pageIndex = document.querySelector(".notice-move span")
 
   lBtn.addEventListener("click", () => {
     if (index <= 1) return;
     nMove.setAttribute("style", `transform: translateX(${page += 1200}px)`)
     index--
-    console.log(index)
+    pageIndex.textContent = index
   })
 
   rBtn.addEventListener("click", () => {
     if (index >= maxPage) return;
-    index++
     nMove.setAttribute("style", `transform: translateX(${page -= 1200}px)`)
-    console.log(index)
-
+    index++
+    pageIndex.textContent = index
   })
+
+
 
 
 }
@@ -58,10 +63,13 @@ function noticeSlide() {
 
 function renderNotice(url) {
   const nMove = document.querySelector(".notice-slide >li")
+  const pageIndex = document.querySelector(".notice-move span")
   nMove.setAttribute("style", `transform: translateX(0px)`)
   index = 1;
   page = 0;
   nMove.innerHTML = ''
+
+  pageIndex.textContent = index
 
   fetch(url)
     .then(res => res.json())
@@ -71,12 +79,12 @@ function renderNotice(url) {
         const value = data[e]
         nMove.innerHTML +=
           `
-          <ul  >
-                      <span>${value["type"]}</span>
-                      <span>${value["title"]}</span>
-                      <span>${value["date"]}</span>
-                    </ul>
-        `
+      <ul  >
+      <span>${value["type"]}</span>
+      <span>${value["title"]}</span>
+      <span>${value["date"]}</span>
+      </ul>
+      `
       })
 
 

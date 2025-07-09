@@ -12,6 +12,7 @@ fetch("product.json")
       const box2 = document.createElement("div")
 
       box2.classList.add("items")
+      box2.setAttribute("data-id", e)
 
 
       Object.keys(item).forEach((e2) => {
@@ -23,9 +24,9 @@ fetch("product.json")
 
           box2.innerHTML +=
             `
-            <div class="item">
+            <div class="item" data-cate="${e}" data-idx="${e2}">
               <div class="img-cover">
-                <img src="../asset/A-Module/images/${e}/${e2}.PNG" alt="" />
+                <img src="../asset/A-Module/images/${e}/${e2}.PNG" alt="${e}${e2}Img" />
               </div>
 
               <div class="item-content">
@@ -35,7 +36,7 @@ fetch("product.json")
                   <div class="item-price">가격: <span >${item[e2]["price"]}</span></div>
                   <div class="item-btn">
                     <a href="#">구매하기</a>
-                    <a href="#">장바구니담기</a>
+                    <span>장바구니담기</span>
                   </div>
                 </div>
               </div>
@@ -48,8 +49,8 @@ fetch("product.json")
           box2.innerHTML +=
             `
 
-            <div class="item">
-              <div class="img-cover">
+            <div class="item" data-cate="${e}" data-idx="${e2}">
+          <div class="img-cover">
                 <img src="../asset/A-Module/images/${e}/${e2}.PNG" alt="" />
               </div>
 
@@ -60,7 +61,7 @@ fetch("product.json")
                   <div class="item-price">가격: <span style="text-decoration: line-through;">${item[e2]["price"]}</span> -> <span class="discount">${item[e2]["discount"]}</span> </div>
                   <div class="item-btn">
                     <a href="#">구매하기</a>
-                    <a href="#">장바구니담기</a>
+                    <span>장바구니담기</span>
                   </div>
                 </div>
               </div>

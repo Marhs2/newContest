@@ -15,3 +15,7 @@ function  alert($msg)
 {
   echo "<script>alert('$msg')</script>";
 }
+
+function ss () {
+  return $_SESSION['ss'];
+}

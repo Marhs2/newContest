@@ -3,6 +3,10 @@
   margin: 10px;
   display: flex;
   justify-content: start;
+  flex-wrap: wrap;
+  width: 1400px;
+  height: 700px;
+  overflow-y: scroll;
 }
 
 .checkout {
@@ -26,11 +30,12 @@
   border-radius: 10px;
 }
 
-.checkout div:nth-child(1){
+.checkout div:nth-child(1) {
   font-weight: bold;
   font-size: 40px;
 }
 
 .item {
   margin: 30px;
+  height: 350px;
 }

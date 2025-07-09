@@ -109,7 +109,12 @@ $notice = DB::fetchAll("select * from notice");
           <li><a href="#" class="login"><?= $_SESSION["ss"]->id ?></a></li>
           <li><a href="#" onclick="logout()" class="logout">로그아웃</a></li>
           <li><a href="#">장바구니</a></li>
-          <li><a href="#">관리자</a></li>
+          <li><a href="#">관리자</a>
+            <ul>
+              <li><a href="./noticeAdmin.php">공지사항관리</a></li>
+              <li><a href="./prodcutAdmin.php">판매상품관리</a></li>
+            </ul>
+          </li>
         </ul>
       <?php } else if (isset($_SESSION["ss"])) { ?>
         <ul class="nav02">
@@ -666,7 +671,7 @@ $notice = DB::fetchAll("select * from notice");
         <div class="notice-container">
           <div class="notice-move">
             <div class="notice-left">&lt;</div>
-            <div>1 페이지</div>
+            <div><span>1</span> 페이지</div>
             <div class="notice-right">&gt;</div>
           </div>
 

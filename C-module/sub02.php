@@ -192,7 +192,7 @@
           </ul>
         </li>
       </ul>
-      <?php if (isset($_SESSION["ss"]->isAdmin) === 1) { ?>
+      <?php if (isset($_SESSION["ss"]->isAdmin) && $_SESSION["ss"]->isAdmin  == 1) { ?>
         <ul class="nav02">
           <li><a href="#" class="login"><?= $_SESSION["ss"]->id ?></a></li>
           <li><a href="#" onclick="logout()" class="logout">로그아웃</a></li>
@@ -201,8 +201,8 @@
         </ul>
       <?php } else if (isset($_SESSION["ss"])) { ?>
         <ul class="nav02">
-          <li><a href="#" class="login">로그인</a></li>
-          <li><a href="#" class="signup">회원가입</a></li>
+          <li><a href="#" class="login"><?= $_SESSION["ss"]->id ?></a></li>
+          <li><a href="#" onclick="logout()" class="logout">로그아웃</a></li>
           <li><a href="#">장바구니</a></li>
         </ul>
       <?php } else { ?>
@@ -247,37 +247,37 @@
       </div>
 
       <div class="title">ALL PRODCUTS</div>
+
       <div class="prodcuts-container">
-        <div class="items">
-          <div class="item">
+        <div class="items" data-id="건강식품">
+
+          <div class="item" data-cate="건강식품" data-idx="1">
             <div class="img-cover">
-              <img src="../asset/A-Module/images/건강식품/1.PNG" alt="" />
+              <img src="../asset/A-Module/images/건강식품/1.PNG" alt="">
             </div>
 
             <div class="item-content">
-
               <div class="item-title">상품명: 이뮨 멀티비타민&amp;미네랄</div>
               <div class="item-about">
-                <div class="item-price">
-                  가격:
-                  <span style="text-decoration: line-through">75,000</span>
-                  -&gt; <span class="price">65,000</span>
-                </div>
+
+                <div class="item-price">가격: <span style="text-decoration: line-through;">75,000</span> -&gt; <span class="discount">65,000</span> </div>
                 <div class="item-btn">
                   <a href="#">구매하기</a>
                   <span>장바구니담기</span>
                 </div>
               </div>
             </div>
+
           </div>
-          <div class="item">
+          <div class="item" data-cate="건강식품" data-idx="2">
             <div class="img-cover">
-              <img src="../asset/A-Module/images/건강식품/2.PNG" alt="" />
+              <img src="../asset/A-Module/images/건강식품/2.PNG" alt="건강식품2Img">
             </div>
 
             <div class="item-content">
               <div class="item-title">상품명: 센트룸</div>
               <div class="item-about">
+
                 <div class="item-price">가격: <span>27,000</span></div>
                 <div class="item-btn">
                   <a href="#">구매하기</a>
@@ -285,15 +285,19 @@
                 </div>
               </div>
             </div>
+
+
+
           </div>
-          <div class="item">
+          <div class="item" data-cate="건강식품" data-idx="3">
             <div class="img-cover">
-              <img src="../asset/A-Module/images/건강식품/3.PNG" alt="" />
+              <img src="../asset/A-Module/images/건강식품/3.PNG" alt="건강식품3Img">
             </div>
 
             <div class="item-content">
               <div class="item-title">상품명: 닥터브라이언</div>
               <div class="item-about">
+
                 <div class="item-price">가격: <span>2,000</span></div>
                 <div class="item-btn">
                   <a href="#">구매하기</a>
@@ -301,15 +305,19 @@
                 </div>
               </div>
             </div>
+
+
+
           </div>
-          <div class="item">
+          <div class="item" data-cate="건강식품" data-idx="4">
             <div class="img-cover">
-              <img src="../asset/A-Module/images/건강식품/4.PNG" alt="" />
+              <img src="../asset/A-Module/images/건강식품/4.PNG" alt="건강식품4Img">
             </div>
 
             <div class="item-content">
               <div class="item-title">상품명: 액티브 멀티포맨</div>
               <div class="item-about">
+
                 <div class="item-price">가격: <span>30,000</span></div>
                 <div class="item-btn">
                   <a href="#">구매하기</a>
@@ -317,15 +325,19 @@
                 </div>
               </div>
             </div>
+
+
+
           </div>
-          <div class="item">
+          <div class="item" data-cate="건강식품" data-idx="5">
             <div class="img-cover">
-              <img src="../asset/A-Module/images/건강식품/5.PNG" alt="" />
+              <img src="../asset/A-Module/images/건강식품/5.PNG" alt="건강식품5Img">
             </div>
 
             <div class="item-content">
               <div class="item-title">상품명: 네이처메이드B12</div>
               <div class="item-about">
+
                 <div class="item-price">가격: <span>30,000</span></div>
                 <div class="item-btn">
                   <a href="#">구매하기</a>
@@ -333,40 +345,21 @@
                 </div>
               </div>
             </div>
+
+
+
           </div>
         </div>
-        <div class="items">
-          <div class="item">
+        <div class="items" data-id="디지털">
+          <div class="item" data-cate="디지털" data-idx="1">
             <div class="img-cover">
-              <img src="../asset/A-Module/images/디지털/4.PNG" alt="" />
-            </div>
-
-            <div class="item-content">
-              <div class="item-title">
-                상품명: 파이널마우스 스타라이트12 페가수스 미디엄
-              </div>
-              <div class="item-about">
-                <div class="item-price" style="font-size: 16px">
-                  가격:
-                  <span style="text-decoration: line-through">1,254,000</span>
-                  -&gt; <span class="price">1,128,600</span>
-                </div>
-                <div class="item-btn">
-                  <a href="#">구매하기</a>
-                  <span>장바구니담기</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="item">
-            <div class="img-cover">
-              <img src="../asset/A-Module/images/디지털/1.PNG" alt="" />
+              <img src="../asset/A-Module/images/디지털/1.PNG" alt="디지털1Img">
             </div>
 
             <div class="item-content">
               <div class="item-title">상품명: PANTONE PD충전 보조배터리</div>
               <div class="item-about">
+
                 <div class="item-price">가격: <span>24,400</span></div>
                 <div class="item-btn">
                   <a href="#">구매하기</a>
@@ -374,17 +367,19 @@
                 </div>
               </div>
             </div>
+
+
+
           </div>
-          <div class="item">
+          <div class="item" data-cate="디지털" data-idx="2">
             <div class="img-cover">
-              <img src="../asset/A-Module/images/디지털/2.PNG" alt="" />
+              <img src="../asset/A-Module/images/디지털/2.PNG" alt="디지털2Img">
             </div>
 
             <div class="item-content">
-              <div class="item-title">
-                상품명: Bowie D05 무선 블루투스 5.3 헤드셋
-              </div>
+              <div class="item-title">상품명: Bowie D05 무선 블루투스 5.3 헤드셋 </div>
               <div class="item-about">
+
                 <div class="item-price">가격: <span>36,900</span></div>
                 <div class="item-btn">
                   <a href="#">구매하기</a>
@@ -392,15 +387,19 @@
                 </div>
               </div>
             </div>
+
+
+
           </div>
-          <div class="item">
+          <div class="item" data-cate="디지털" data-idx="3">
             <div class="img-cover">
-              <img src="../asset/A-Module/images/디지털/3.PNG" alt="" />
+              <img src="../asset/A-Module/images/디지털/3.PNG" alt="디지털3Img">
             </div>
 
             <div class="item-content">
               <div class="item-title">상품명: 독거미 F99 기계식 키보드</div>
               <div class="item-about">
+
                 <div class="item-price">가격: <span>70,750</span></div>
                 <div class="item-btn">
                   <a href="#">구매하기</a>
@@ -408,16 +407,38 @@
                 </div>
               </div>
             </div>
+
+
+
           </div>
 
-          <div class="item">
+          <div class="item" data-cate="디지털" data-idx="4">
             <div class="img-cover">
-              <img src="../asset/A-Module/images/디지털/5.PNG" alt="" />
+              <img src="../asset/A-Module/images/디지털/4.PNG" alt="">
+            </div>
+
+            <div class="item-content">
+              <div class="item-title">상품명: 파이널마우스 스타라이트12 페가수스 미디엄</div>
+              <div class="item-about">
+
+                <div class="item-price">가격: <span style="text-decoration: line-through;">1,254,000</span> -&gt; <span class="discount">1,128,600</span> </div>
+                <div class="item-btn">
+                  <a href="#">구매하기</a>
+                  <span>장바구니담기</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="item" data-cate="디지털" data-idx="5">
+            <div class="img-cover">
+              <img src="../asset/A-Module/images/디지털/5.PNG" alt="디지털5Img">
             </div>
 
             <div class="item-content">
               <div class="item-title">상품명: 보이저5200 블루투스 이어폰</div>
               <div class="item-about">
+
                 <div class="item-price">가격: <span>146,000</span></div>
                 <div class="item-btn">
                   <a href="#">구매하기</a>
@@ -425,38 +446,21 @@
                 </div>
               </div>
             </div>
+
+
+
           </div>
         </div>
-        <div class="items">
-          <div class="item">
+        <div class="items" data-id="팬시">
+          <div class="item" data-cate="팬시" data-idx="1">
             <div class="img-cover">
-              <img src="../asset/A-Module/images/팬시/4.PNG" alt="" />
-            </div>
-
-            <div class="item-content">
-              <div class="item-title">상품명: 게이밍 이어폰 VJJB NI</div>
-              <div class="item-about">
-                <div class="item-price">
-                  가격:
-                  <span style="text-decoration: line-through">38,900</span>
-                  -&gt; <span class="price">28,900</span>
-                </div>
-                <div class="item-btn">
-                  <a href="#">구매하기</a>
-                  <span>장바구니담기</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="item">
-            <div class="img-cover">
-              <img src="../asset/A-Module/images/팬시/1.PNG" alt="" />
+              <img src="../asset/A-Module/images/팬시/1.PNG" alt="팬시1Img">
             </div>
 
             <div class="item-content">
               <div class="item-title">상품명: 명품 자동 장우산</div>
               <div class="item-about">
+
                 <div class="item-price">가격: <span>31,600</span></div>
                 <div class="item-btn">
                   <a href="#">구매하기</a>
@@ -464,17 +468,19 @@
                 </div>
               </div>
             </div>
+
+
+
           </div>
-          <div class="item">
+          <div class="item" data-cate="팬시" data-idx="2">
             <div class="img-cover">
-              <img src="../asset/A-Module/images/팬시/2.PNG" alt="" />
+              <img src="../asset/A-Module/images/팬시/2.PNG" alt="팬시2Img">
             </div>
 
             <div class="item-content">
-              <div class="item-title">
-                상품명: 14K 윙블링 원터치 링 귀걸이(주문제작)
-              </div>
+              <div class="item-title">상품명: 14K 윙블링 원터치 링 귀걸이(주문제작)</div>
               <div class="item-about">
+
                 <div class="item-price">가격: <span>250,000</span></div>
                 <div class="item-btn">
                   <a href="#">구매하기</a>
@@ -482,17 +488,19 @@
                 </div>
               </div>
             </div>
+
+
+
           </div>
-          <div class="item">
+          <div class="item" data-cate="팬시" data-idx="3">
             <div class="img-cover">
-              <img src="../asset/A-Module/images/팬시/3.PNG" alt="" />
+              <img src="../asset/A-Module/images/팬시/3.PNG" alt="팬시3Img">
             </div>
 
             <div class="item-content">
-              <div class="item-title">
-                상품명: 14K 윙블링 메르시 목걸이(주문제작)
-              </div>
+              <div class="item-title">상품명: 14K 윙블링 메르시 목걸이(주문제작)</div>
               <div class="item-about">
+
                 <div class="item-price">가격: <span>265,000</span></div>
                 <div class="item-btn">
                   <a href="#">구매하기</a>
@@ -500,16 +508,38 @@
                 </div>
               </div>
             </div>
+
+
+
           </div>
 
-          <div class="item">
+          <div class="item" data-cate="팬시" data-idx="4">
             <div class="img-cover">
-              <img src="../asset/A-Module/images/팬시/5.PNG" alt="" />
+              <img src="../asset/A-Module/images/팬시/4.PNG" alt="">
+            </div>
+
+            <div class="item-content">
+              <div class="item-title">상품명: 게이밍 이어폰 VJJB NI</div>
+              <div class="item-about">
+
+                <div class="item-price">가격: <span style="text-decoration: line-through;">38,900</span> -&gt; <span class="discount">28,900</span> </div>
+                <div class="item-btn">
+                  <a href="#">구매하기</a>
+                  <span>장바구니담기</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="item" data-cate="팬시" data-idx="5">
+            <div class="img-cover">
+              <img src="../asset/A-Module/images/팬시/5.PNG" alt="팬시5Img">
             </div>
 
             <div class="item-content">
               <div class="item-title">상품명: 인스탁스 미니 에보</div>
               <div class="item-about">
+
                 <div class="item-price">가격: <span>320,000</span></div>
                 <div class="item-btn">
                   <a href="#">구매하기</a>
@@ -517,38 +547,21 @@
                 </div>
               </div>
             </div>
+
+
+
           </div>
         </div>
-        <div class="items">
-          <div class="item">
+        <div class="items" data-id="향수">
+          <div class="item" data-cate="향수" data-idx="1">
             <div class="img-cover">
-              <img src="../asset/A-Module/images/향수/4.PNG" alt="" />
-            </div>
-
-            <div class="item-content">
-              <div class="item-title">상품명: 몽블랑 익스플로러 EDP 60ml</div>
-              <div class="item-about">
-                <div class="item-price">
-                  가격:
-                  <span style="text-decoration: line-through">103,000</span>
-                  -&gt; <span class="price">93,000</span>
-                </div>
-                <div class="item-btn">
-                  <a href="#">구매하기</a>
-                  <span>장바구니담기</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="item">
-            <div class="img-cover">
-              <img src="../asset/A-Module/images/향수/1.PNG" alt="" />
+              <img src="../asset/A-Module/images/향수/1.PNG" alt="향수1Img">
             </div>
 
             <div class="item-content">
               <div class="item-title">상품명: 에스쁘아 솔리드 퍼퓸 4.2g</div>
               <div class="item-about">
+
                 <div class="item-price">가격: <span>26,000</span></div>
                 <div class="item-btn">
                   <a href="#">구매하기</a>
@@ -556,17 +569,19 @@
                 </div>
               </div>
             </div>
+
+
+
           </div>
-          <div class="item">
+          <div class="item" data-cate="향수" data-idx="2">
             <div class="img-cover">
-              <img src="../asset/A-Module/images/향수/2.PNG" alt="" />
+              <img src="../asset/A-Module/images/향수/2.PNG" alt="향수2Img">
             </div>
 
             <div class="item-content">
-              <div class="item-title">
-                상품명: 호텔도슨 향수 오드퍼퓸 75ml
-              </div>
+              <div class="item-title">상품명: 호텔도슨 향수 오드퍼퓸 75ml</div>
               <div class="item-about">
+
                 <div class="item-price">가격: <span>153,000</span></div>
                 <div class="item-btn">
                   <a href="#">구매하기</a>
@@ -574,15 +589,19 @@
                 </div>
               </div>
             </div>
+
+
+
           </div>
-          <div class="item">
+          <div class="item" data-cate="향수" data-idx="3">
             <div class="img-cover">
-              <img src="../asset/A-Module/images/향수/3.PNG" alt="" />
+              <img src="../asset/A-Module/images/향수/3.PNG" alt="향수3Img">
             </div>
 
             <div class="item-content">
               <div class="item-title">상품명: 랑방 레 플레르 EDT 90ml</div>
               <div class="item-about">
+
                 <div class="item-price">가격: <span>64,500</span></div>
                 <div class="item-btn">
                   <a href="#">구매하기</a>
@@ -590,16 +609,38 @@
                 </div>
               </div>
             </div>
+
+
+
           </div>
 
-          <div class="item">
+          <div class="item" data-cate="향수" data-idx="4">
             <div class="img-cover">
-              <img src="../asset/A-Module/images/향수/5.PNG" alt="" />
+              <img src="../asset/A-Module/images/향수/4.PNG" alt="">
+            </div>
+
+            <div class="item-content">
+              <div class="item-title">상품명: 몽블랑 익스플로러 EDP 60ml</div>
+              <div class="item-about">
+
+                <div class="item-price">가격: <span style="text-decoration: line-through;">103,000</span> -&gt; <span class="discount">93,000</span> </div>
+                <div class="item-btn">
+                  <a href="#">구매하기</a>
+                  <span>장바구니담기</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="item" data-cate="향수" data-idx="5">
+            <div class="img-cover">
+              <img src="../asset/A-Module/images/향수/5.PNG" alt="향수5Img">
             </div>
 
             <div class="item-content">
               <div class="item-title">상품명: 캘빈클라인 One EDT 50ml</div>
               <div class="item-about">
+
                 <div class="item-price">가격: <span>58,900</span></div>
                 <div class="item-btn">
                   <a href="#">구매하기</a>
@@ -607,42 +648,21 @@
                 </div>
               </div>
             </div>
+
+
+
           </div>
         </div>
-        <div class="items">
-          <div class="item">
+        <div class="items" data-id="헤어케어">
+          <div class="item" data-cate="헤어케어" data-idx="1">
             <div class="img-cover">
-              <img src="../asset/A-Module/images/헤어케어/5.PNG" alt="" />
+              <img src="../asset/A-Module/images/헤어케어/1.PNG" alt="헤어케어1Img">
             </div>
 
             <div class="item-content">
-              <div class="item-title">
-                상품명: 닥터포헤어 피토프레시 헤어쿨링 스프레이 150ml
-              </div>
+              <div class="item-title">상품명: 어노브 딥 데미지 트리트먼트 EX 더블</div>
               <div class="item-about">
-                <div class="item-price">
-                  가격:
-                  <span style="text-decoration: line-through">16,000</span>
-                  -&gt; <span class="price">14,400</span>
-                </div>
-                <div class="item-btn">
-                  <a href="#">구매하기</a>
-                  <span>장바구니담기</span>
-                </div>
-              </div>
-            </div>
-          </div>
 
-          <div class="item">
-            <div class="img-cover">
-              <img src="../asset/A-Module/images/헤어케어/1.PNG" alt="" />
-            </div>
-
-            <div class="item-content">
-              <div class="item-title">
-                상품명: 어노브 딥 데미지 트리트먼트 EX 더블
-              </div>
-              <div class="item-about">
                 <div class="item-price">가격: <span>29,800</span></div>
                 <div class="item-btn">
                   <a href="#">구매하기</a>
@@ -650,17 +670,19 @@
                 </div>
               </div>
             </div>
+
+
+
           </div>
-          <div class="item">
+          <div class="item" data-cate="헤어케어" data-idx="2">
             <div class="img-cover">
-              <img src="../asset/A-Module/images/헤어케어/2.PNG" alt="" />
+              <img src="../asset/A-Module/images/헤어케어/2.PNG" alt="헤어케어2Img">
             </div>
 
             <div class="item-content">
-              <div class="item-title">
-                상품명: 려 루트젠 여성맞춤 볼륨 탈모증상케어 샴퓨 353ml
-              </div>
+              <div class="item-title">상품명: 려 루트젠 여성맞춤 볼륨 탈모증상케어 샴퓨 353ml</div>
               <div class="item-about">
+
                 <div class="item-price">가격: <span>21,900</span></div>
                 <div class="item-btn">
                   <a href="#">구매하기</a>
@@ -668,17 +690,19 @@
                 </div>
               </div>
             </div>
+
+
+
           </div>
-          <div class="item">
+          <div class="item" data-cate="헤어케어" data-idx="3">
             <div class="img-cover">
-              <img src="../asset/A-Module/images/헤어케어/3.PNG" alt="" />
+              <img src="../asset/A-Module/images/헤어케어/3.PNG" alt="헤어케어3Img">
             </div>
 
             <div class="item-content">
-              <div class="item-title">
-                상품명: 라보에이치 두피쿨링&amp;노세범 샴푸 333ml
-              </div>
+              <div class="item-title">상품명: 라보에이치 두피쿨링&amp;노세범 샴푸 333ml</div>
               <div class="item-about">
+
                 <div class="item-price">가격: <span>19,800</span></div>
                 <div class="item-btn">
                   <a href="#">구매하기</a>
@@ -686,17 +710,19 @@
                 </div>
               </div>
             </div>
+
+
+
           </div>
-          <div class="item">
+          <div class="item" data-cate="헤어케어" data-idx="4">
             <div class="img-cover">
-              <img src="../asset/A-Module/images/헤어케어/4.PNG" alt="" />
+              <img src="../asset/A-Module/images/헤어케어/4.PNG" alt="헤어케어4Img">
             </div>
 
             <div class="item-content">
-              <div class="item-title">
-                상품명: 모로칸오일 헤어트리트먼트 100ml
-              </div>
+              <div class="item-title">상품명: 모로칸오일 헤어트리트먼트 100ml</div>
               <div class="item-about">
+
                 <div class="item-price">가격: <span>52,200</span></div>
                 <div class="item-btn">
                   <a href="#">구매하기</a>
@@ -704,10 +730,31 @@
                 </div>
               </div>
             </div>
+
+
+
+          </div>
+
+          <div class="item" data-cate="헤어케어" data-idx="5">
+            <div class="img-cover">
+              <img src="../asset/A-Module/images/헤어케어/5.PNG" alt="">
+            </div>
+
+            <div class="item-content">
+              <div class="item-title">상품명: 닥터포헤어 피토프레시 헤어쿨링 스프레이 150ml</div>
+              <div class="item-about">
+
+                <div class="item-price">가격: <span style="text-decoration: line-through;">16,000</span> -&gt; <span class="discount">14,400</span> </div>
+                <div class="item-btn">
+                  <a href="#">구매하기</a>
+                  <span>장바구니담기</span>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
-
       <div class="noneUserBtn">비회원주문</div>
     </div>
   </main>

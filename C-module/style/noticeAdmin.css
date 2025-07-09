@@ -1,0 +1,49 @@
+table {
+  border-collapse: collapse;
+  vertical-align: top;
+  vertical-align: bottom;
+  vertical-align: middle;
+  margin: 0 auto;
+}
+
+td {
+  padding: 5px;
+}
+
+tr td:nth-child(5) {
+  cursor: pointer;
+}
+
+td > span {
+  width: 500px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+}
+
+.item-des {
+  width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: keep-all;
+  white-space: nowrap;
+}
+
+.discount {
+  display: flex;
+  gap: 5px;
+  width: 300px;
+  justify-content: space-around;
+}
+
+.edit {
+  width: 1000px;
+  margin: 0 auto;
+  border: 1px solid black;
+  text-align: center;
+}
+
+.edit [class*="item-"] {
+  width: 500px;
+}
