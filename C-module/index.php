@@ -104,7 +104,7 @@ $notice = DB::fetchAll("select * from notice");
           </ul>
         </li>
       </ul>
-      <?php if (isset($_SESSION["ss"]->isAdmin) && $_SESSION["ss"]->isAdmin  == 1) { ?>
+      <?php if (isset($_SESSION["ss"]->id) && $_SESSION["ss"]->id  == "admin") { ?>
         <ul class="nav02">
           <li><a href="#" class="login"><?= $_SESSION["ss"]->id ?></a></li>
           <li><a href="#" onclick="logout()" class="logout">로그아웃</a></li>

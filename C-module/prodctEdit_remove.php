@@ -1,15 +1,21 @@
 <?php
 require_once "db.php";
 
-$cate = $_GET["cate"];
-$idx = $_GET["idx"];
+
+if ($_GET["img"]) {
+  $img = $_GET["img"];
+  $product = DB::fetch("select * from prodcut where img = '$img'");
+} else {
+  $cate = $_GET["cate"];
+  $idx = $_GET["idx"];
+  $product = DB::fetch("select * from prodcut where cate = '$cate' and itemNum = '$idx'");
+}
 
 
-$product = DB::fetch("select * from prodcut where cate = '$cate' and itemNum = '$idx'");
 
 
 
-// $notice = DB::fetchAll("select * from product");
+
 
 ?>
 
@@ -150,38 +156,50 @@ $product = DB::fetch("select * from prodcut where cate = '$cate' and itemNum = '
 
   <main class="edit">
 
-    <form method="post">
+    <form method="post" action="prodctEdit_removeAction.php" enctype="multipart/form-data">
+      <?php if (isset($product->img)) { ?>
+        <input type="hidden" name="type" value="img">
+        <input type="hidden" name="typeName" value="<?= $product->img ?>">
+      <?php } else { ?>
+        <input type="hidden" name="type" value="cate">
+        <input type="hidden" name="typeName" value="<?= $cate ?>">
+        <input type="hidden" name="typeNum" value="<?= $idx ?>">
+      <?php } ?>
+
       <div class="item-imgUpload">
-        <img src="./asset/A-Module/images/<?= $product->cate ?>/<?= $product->itemNum ?>.PNG" alt="imagePreview" id="imagePreview">
-        <input type="file" name="img" accept="image/*">
+        <?php if (isset($product->img)) { ?>
+          <img src="../asset/A-Module/images/else/<?= $product->img ?>" alt="<?= $product->cate ?><?= $product->itemNum ?>Img" id="imgPreview">
+        <?php } else { ?>
+          <img src="../asset/A-Module/images/<?= $product->cate ?>/<?= $product->itemNum ?>.PNG" alt="<?= $product->cate ?><?= $product->itemNum ?>Img" id="imgPreview">
+        <?php } ?> <input type="file" name="img" accept="image/*">
       </div>
 
       <div class="item-title">
         <select name="cate">
-          <option value="건강식품" <?= $cate == "건강식품" ? "selected" : "" ?>>건강식품</option>
-          <option value="디지털" <?= $cate == "디지털" ? "selected" : "" ?>>디지털</option>
-          <option value="팬시" <?= $cate == "팬시" ? "selected" : "" ?>>팬시</option>
-          <option value="향수" <?= $cate == "향수" ? "selected" : "" ?>>향수</option>
-          <option value="헤어케어" <?= $cate == "헤어케어" ? "selected" : "" ?>>헤어케어</option>
+          <option value="건강식품" <?= $product->cate == "건강식품" ? "selected" : "" ?>>건강식품</option>
+          <option value="디지털" <?= $product->cate == "디지털" ? "selected" : "" ?>>디지털</option>
+          <option value="팬시" <?= $product->cate == "팬시" ? "selected" : "" ?>>팬시</option>
+          <option value="향수" <?= $product->cate == "향수" ? "selected" : "" ?>>향수</option>
+          <option value="헤어케어" <?= $product->cate == "헤어케어" ? "selected" : "" ?>>헤어케어</option>
         </select>
       </div>
 
       <div class="item-title">
-        <input type="text" name="text" name="title" value="<?= $product->title ?>">
+        <input type="text" name="title" value="<?= $product->title ?>">
       </div>
       <div class="item-des">
-        <input type="text" name="text" name="des" value="<?= $product->des ?>">
+        <input type="text" name="des" value="<?= $product->des ?>">
       </div>
       <div class="item-price">
-        <input type="text" name="text" name="price" value="<?= $product->price ?>">
+        <input type="text" name="price" value="<?= $product->price ?>">
       </div>
 
       <div class="discount">
-        <input type="radio" name="discount" id="won" value="1">
+        <input type="radio" name="discount" id="won" value="1" <?= $product->discount == 1 ? "checked" : "" ?>>
         <label for="won">만원할인</label>
-        <input type="radio" name="discount" id="ten" value="10">
+        <input type="radio" name="discount" id="ten" value="2" <?= $product->discount == 2 ? "checked" : "" ?>>
         <label for="ten">10% 할인</label>
-        <input type="radio" name="discount" id="three" value="30">
+        <input type="radio" name="discount" id="three" value="3" <?= $product->discount == 3 ? "checked" : "" ?>>
         <label for="three">30% 할인</label>
       </div>
       <input type="submit" value="수정">

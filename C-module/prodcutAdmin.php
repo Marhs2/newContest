@@ -1,6 +1,7 @@
 <?php
 require_once "db.php";
 
+
 $notice = DB::fetchAll("select * from prodcut");
 
 ?>
@@ -146,6 +147,14 @@ $notice = DB::fetchAll("select * from prodcut");
     $counter = 0;
 
     foreach ($notice as $key => $value) {
+      if ($value->discount == "1") {
+        $discount = $value->price - 10000;
+      } else if ($value->discount == "2") {
+        $discount = $value->price  * 0.90;
+      } else if ($value->discount == "3") {
+        $discount = $value->price  * 0.70;
+      }
+
       if ($counter % 5 === 0) {
         if ($counter > 0) {
           echo '</div>';
@@ -156,7 +165,11 @@ $notice = DB::fetchAll("select * from prodcut");
 
       <div class="item" data-cate="디지털" data-idx="1">
         <div class="img-cover">
-          <img src="../asset/A-Module/images/<?= $value->cate ?>/<?= $value->itemNum ?>.PNG" alt="<?= $value->cate ?><?= $value->itemNum ?>Img">
+          <?php if (isset($value->img)) { ?>
+            <img src="../asset/A-Module/images/else/<?= $value->img ?>" alt="<?= $value->cate ?><?= $value->itemNum ?>Img">
+          <?php } else { ?>
+            <img src="../asset/A-Module/images/<?= $value->cate ?>/<?= $value->itemNum ?>.PNG" alt="<?= $value->cate ?><?= $value->itemNum ?>Img">
+          <?php } ?>
         </div>
 
         <div class="item-content">
@@ -166,13 +179,17 @@ $notice = DB::fetchAll("select * from prodcut");
             <?php if ($value->discount == "0") { ?>
               <div class="item-price">가격: <span><?= $value->price ?></span></div>
             <?php } else { ?>
-              <div class="item-price"><span style="text-decoration: line-through;"><?= $value->price ?></span> -> <span class="discount"><?= $value->discount ?></span> </div>
+              <div class="item-price"><span style="text-decoration: line-through;"><?= $value->price ?></span> -> <span class="discount"><?= $discount  ?></span> </div>
             <?php } ?>
 
             <div class="item-des"><?= $value->des ?></div>
             <div class="item-btn">
               <span>삭제</span>
-              <a href="./prodctEdit_remove.php?cate=디지털&idx=1">수정</a>
+              <?php if (isset($value->img)) { ?>
+                <a href="./prodctEdit_remove.php?img=<?= $value->img ?>">수정</a>
+              <?php } else { ?>
+                <a href="./prodctEdit_remove.php?cate=<?= $value->cate ?>&idx=<?= $value->itemNum ?>">수정</a>
+              <?php } ?>
             </div>
           </div>
         </div>

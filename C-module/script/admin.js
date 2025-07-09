@@ -37,20 +37,17 @@ function imgPreview() {
   if (location.pathname != "/prodctEdit_remove.php") return;
 
   const fileInput = document.querySelector("[type='file']");
-  const imagePreview = document.querySelector("#imagePreview");
+  const imgPreview = document.querySelector("#imgPreview");
 
-  // fileInput이나 imagePreview가 없을 경우를 대비해 오류를 방지합니다.
-  if (!fileInput || !imagePreview) {
-    console.error("필요한 HTML 요소(file input 또는 imagePreview)를 찾을 수 없습니다.");
-    return;
-  }
+  console.log(imgPreview);
+
 
   fileInput.addEventListener("change", (e) => {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = function (e) {
-        imagePreview.src = e.target.result;
+        imgPreview.src = e.target.result;
       }
       reader.readAsDataURL(file);
     }
