@@ -31,12 +31,6 @@
   background-color: black;
 }
 
-.slide li {
-  position: relative;
-  width: 100%;
-  animation: Mainslide 10s infinite;
-}
-
 .slide-content {
   position: absolute;
   bottom: 100px;
@@ -59,70 +53,14 @@
   overflow: hidden;
 }
 
-.slide:hover li {
+/* .slide:hover li {
   animation-play-state: paused;
-}
+} */
 
 .slide ul {
   width: calc(100% * 4);
   display: flex;
   transition: 0.4s;
-}
-
-@keyframes Mainslide {
-  0% {
-    transform: translateX(0);
-  }
-  24% {
-    transform: translateX(0%);
-  }
-  29% {
-    transform: translateX(-100%);
-  }
-  62% {
-    transform: translateX(-100%);
-  }
-  66% {
-    transform: translateX(-200%);
-  }
-  96% {
-    transform: translateX(-200%);
-  }
-  100% {
-    transform: translateX(-300%);
-  }
-}
-
-@keyframes slideLeft {
-  0% {
-    transform: translateX(0);
-  }
-  24% {
-    transform: translateX(0%);
-  }
-  29% {
-    transform: translateX(-100%);
-  }
-  62% {
-    transform: translateX(-100%);
-  }
-  66% {
-    transform: translateX(-200%);
-  }
-  96% {
-    transform: translateX(-200%);
-  }
-  100% {
-    transform: translateX(-300%);
-  }
-}
-
-#left01:checked ~ ul {
-  transform: translateX(calc(-100% / 4));
-}
-
-#right01:checked ~ ul {
-  transform: translateX(calc(-200% / 4));
 }
 
 .item {
@@ -146,7 +84,7 @@
 }
 
 input[type="radio"] {
-  display: none;
+  /* display: none; */
 }
 
 .sale-filter {

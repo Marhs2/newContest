@@ -37,8 +37,8 @@
   text-overflow: ellipsis;
   word-break: keep-all;
   white-space: nowrap;
-  text-align: center;
   font-size: 25px;
+  margin: 0 auto;
   margin-top: 20px;
 }
 
@@ -250,4 +250,8 @@ label {
 
 .checkoutBtn {
   cursor: pointer;
+}
+
+.item-des {
+  margin: 0 auto;
 }

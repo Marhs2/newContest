@@ -146,74 +146,92 @@ print_r(DB::fetchAll("select cate, count(*) from prodcut group by cate"));
 
 
     <?php
-    $counter = 0;
+    // 1. 데이터를 카테고리별로 그룹화합니다.
+    $categorized_items = [];
+    foreach ($notice as $item) {
+      // $item->cate 값을 키로 사용하여 아이템을 배열에 추가합니다.
+      $categorized_items[$item->cate][] = $item;
+    }
 
-    foreach ($notice as $key => $value) {
-      if ($value->discount == "1") {
-        $discount = $value->price - 10000;
-      } else if ($value->discount == "2") {
-        $discount = $value->price  * 0.90;
-      } else if ($value->discount == "3") {
-        $discount = $value->price  * 0.70;
-      } else {
-        $discount = $value->discount;
-      }
 
-      if ($counter % 5 === 0) {
-        if ($counter > 0) {
-          echo '</div>';
+    // 2. 그룹화된 데이터를 기반으로 HTML을 생성합니다.
+    // $category_name에는 '디지털', '가구' 등의 카테고리 이름이 들어갑니다.
+    // $items_in_category에는 해당 카테고리의 아이템 배열이 들어갑니다.
+    foreach ($categorized_items as $category_name => $items_in_category) {
+
+      // 카테고리 제목을 출력합니다. (선택 사항)
+      echo "<h2>" . htmlspecialchars($category_name) . "</h2>";
+
+      $counter = 0; // 각 카테고리마다 카운터를 리셋합니다.
+
+      foreach ($items_in_category as $key => $value) {
+        // 할인율 계산 로직 (기존과 동일)
+        if ($value->discount == "1") {
+          $discount = $value->price - 10000;
+        } else if ($value->discount == "2") {
+          $discount = $value->price * 0.90;
+        } else if ($value->discount == "3") {
+          $discount = $value->price * 0.70;
+        } else {
+          $discount = $value->price; // 할인 코드가 0이거나 다른 값일 때 원래 가격 표시
         }
-        echo '<div class="items">';
-      }
+
+        // 5개마다 div.items를 열고 닫는 로직 (기존과 동일)
+        if ($counter % count($items_in_category) === 0) {
+          if ($counter > 0) {
+            echo '</div>';
+          }
+          echo '<div class="items">';
+        }
     ?>
 
-      <div class="item" data-cate="디지털" data-idx="1">
-        <?php if (isset($value->img) && $value->img != null) { ?>
-          <input type="hidden" name="type" value="img">
-          <input type="hidden" name="typeName" value="<?= $value->img ?>">
-        <?php } else { ?>
-          <input type="hidden" name="type" value="cate">
-          <input type="hidden" name="typeName" value="<?= $value->cate ?>">
-          <input type="hidden" name="typeNum" value="<?= $value->itemNum ?>">
-        <?php } ?>
-        <div class="img-cover">
+        <div class="item" data-cate="<?= htmlspecialchars($value->cate) ?>" data-idx="<?= htmlspecialchars($value->itemNum) ?>">
           <?php if (isset($value->img) && $value->img != null) { ?>
-            <img src="../asset/A-Module/images/else/<?= $value->img ?>" alt="<?= $value->cate ?><?= $value->itemNum ?>Img">
+            <input type="hidden" name="type" value="img">
+            <input type="hidden" name="typeName" value="<?= htmlspecialchars($value->img) ?>">
           <?php } else { ?>
-            <img src="../asset/A-Module/images/<?= $value->cate ?>/<?= $value->itemNum ?>.PNG" alt="<?= $value->cate ?><?= $value->itemNum ?>Img">
+            <input type="hidden" name="type" value="cate">
+            <input type="hidden" name="typeName" value="<?= htmlspecialchars($value->cate) ?>">
+            <input type="hidden" name="typeNum" value="<?= htmlspecialchars($value->itemNum) ?>">
           <?php } ?>
-        </div>
-
-        <div class="item-content">
-          <div class="item-title"><?= $value->title ?></div>
-          <div class="item-about">
-
-            <?php if ($value->discount == "0") { ?>
-              <div class="item-price">가격: <span><?= $value->price ?></span></div>
+          <div class="img-cover">
+            <?php if (isset($value->img) && $value->img != null) { ?>
+              <img src="../asset/A-Module/images/else/<?= htmlspecialchars($value->img) ?>" alt="<?= htmlspecialchars($value->cate) ?><?= htmlspecialchars($value->itemNum) ?>Img">
             <?php } else { ?>
-              <div class="item-price"><span style="text-decoration: line-through;"><?= $value->price ?></span> -> <span class="discount"><?= $discount ?></span> </div>
+              <img src="../asset/A-Module/images/<?= htmlspecialchars($value->cate) ?>/<?= htmlspecialchars($value->itemNum) ?>.PNG" alt="<?= htmlspecialchars($value->cate) ?><?= htmlspecialchars($value->itemNum) ?>Img">
             <?php } ?>
+          </div>
 
-            <div class="item-des"><?= $value->des ?></div>
-            <div class="item-btn">
-              <span onclick="delProdcut('<?= $value->cate ?>','<?= $value->itemNum ?>')">삭제</span>
-              <?php if (isset($value->img) && $value->img  != null) { ?>
-                <a href="./prodctEdit_remove.php?img=<?= $value->img ?>">수정</a>
+          <div class="item-content">
+            <div class="item-title"><?= htmlspecialchars($value->title) ?></div>
+            <div class="item-about" style="text-align: center;">
+              <?php if ($value->discount == "0") { ?>
+                <div class="item-price">가격: <span><?= number_format($value->price) ?></span></div>
               <?php } else { ?>
-                <a href="./prodctEdit_remove.php?cate=<?= $value->cate ?>&idx=<?= $value->itemNum ?>">수정</a>
+                <div class="item-price"><span style="text-decoration: line-through;"><?= number_format($value->price) ?></span>-&gt;<span class="discount"><?= number_format($discount) ?></span></div>
               <?php } ?>
+              <div class="item-des"><?= htmlspecialchars($value->des) ?></div>
+              <div class="item-btn">
+                <span onclick="delProdcut('<?= htmlspecialchars($value->cate) ?>','<?= htmlspecialchars($value->itemNum) ?>')">삭제</span>
+                <?php if (isset($value->img) && $value->img  != null) { ?>
+                  <a href="./prodctEdit_remove.php?img=<?= htmlspecialchars($value->img) ?>">수정</a>
+                <?php } else { ?>
+                  <a href="./prodctEdit_remove.php?cate=<?= htmlspecialchars($value->cate) ?>&idx=<?= htmlspecialchars($value->itemNum) ?>">수정</a>
+                <?php } ?>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
     <?php
-      $counter++;
-    }
+        $counter++;
+      } // 한 카테고리의 아이템 루프 종료
 
-    if ($counter > 0) {
-      echo '</div>';
-    }
+      // 루프가 끝난 후 마지막으로 열린 div.items를 닫아줍니다.
+      if ($counter > 0) {
+        echo '</div>';
+      }
+    } // 전체 카테고리 루프 종료
     ?>
 
 

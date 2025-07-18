@@ -1,23 +1,13 @@
 <?php require_once "db.php";
 
 
-
 if (isset($_SESSION["ss"]->id) || isset($_SESSION["ss"])) {
   $userId = $_SESSION["ss"]->id;
-  if (!DB::fetch("show tables like '$userId'")) {
-    DB::exec("create table `" . $userId . "`(
-    idx int AUTO_INCREMENT PRIMARY KEY,
-    item_id varchar(20) not null,
-    item_cate varchar(20) not null,
-    count int not null,
-    price int not null,
-    discount int not null,
-    title varchar(100) not null
-)");
-  } else {
-    $carts = DB::fetchAll("select * from `" . $userId . "` ");
-  }
+
+  $carts = DB::fetchAll("select p.title,p.price,p.discount , p.idx , p.img ,p.itemNum,p.cate, u.count from userpur u join prodcut p on p.idx = u.itemId where u.userId = '$userId' ");
 }
+
+
 
 
 
@@ -103,49 +93,48 @@ if (isset($_SESSION["ss"]->id) || isset($_SESSION["ss"])) {
 
       <div class="cart">
         <?php if (isset($_SESSION["ss"]->id) || isset($_SESSION["ss"])) { ?>
-          <?php foreach ($carts as $e) { ?>
-            <?php if ($e->discount == "0") { ?>
-              <div class="item" data-cate="<?= $e->item_cate ?>" data-id="<?= $e->item_id ?>">
-                <div class="img-cover">
-                  <img src="../asset/A-Module/images/<?= $e->item_cate ?>/<?= $e->item_id ?>.PNG" alt="<?php $e->item_cate ?><?= $e->item_id ?>Img">
+          <?php foreach ($carts as $key) {
+
+            $discount = $key->discount;
+
+
+            if ($discount == "1") {
+              $discount = $key->price - 10000;
+            } else if ($discount == "2") {
+              $discount = $key->price * 0.90;
+            } else if ($discount == "3") {
+              $discount = $key->price * 0.70;
+            }
+          ?>
+
+            <div class="item" data-id="<?= $key->idx ?>">
+              <div class="img-cover">
+                <img src="../asset/A-Module/images/<?= ($key->img == null ? $key->cate . "/" . $key->itemNum . ".PNG" : "else/" . $key->img) ?>" alt="">
+              </div>
+
+              <div class="item-content">
+                <div class="item-title"><?= $key->title  ?></div>
+                <div class="item-about">
+
+                  <?php if ($discount == "0") { ?>
+                    <div class="item-price">가격: <span><?= number_format($key->price, 0, ".", ",") ?> </div>
+                  <?php } else { ?>
+                    <div class="item-price">가격: <span style="text-decoration: line-through;"><?= number_format($key->price, 0, ".", ",") ?></span> -&gt; <span class="price"><?= number_format($discount, 0, ".", ",") ?></span> </div>
+                  <?php } ?>
+
+
                 </div>
-
-                <div class="item-content">
-                  <div class="item-title"><?= $e->title ?></div>
-                  <div class="item-about">
-
-                    <div class="item-price">가격: <span><?= $e->price ?></span></div>
-                    <div class="itemCount">
-                      <input type="number" value="<?= $e->count ?>" min="1">
-                      <div>가격: <span class="countTotal"><?= $e->price ?></span>원</div>
-                    </div>
+                <div class="itemCount">
+                  <div>
+                    <label for="count">개수: </label>
+                    <input type="number" id="count" value="<?= $key->count  ?>" min="1">
                   </div>
+                  <div><span>가격:</span> <span class="countTotal">65,000</span></div>
                 </div>
               </div>
 
-            <?php } else { ?>
-              <div class="item" data-cate="<?= $e->item_cate ?>" data-id="<?= $e->item_id ?>">
-                <div class="img-cover">
-                  <img src="../asset/A-Module/images/<?= $e->item_cate ?>/<?= $e->item_id ?>.PNG" alt="<?php $e->item_cate ?><?= $e->item_id ?>Img">
-                </div>
-
-                <div class="item-content">
-                  <div class="item-title"><?= $e->title ?></div>
-                  <div class="item-about">
-
-                    <div class="item-price">가격: <span style="text-decoration: line-through;"><?= $e->price ?></span> -&gt; <span class="discount"><?= $e->discount ?></span> </div>
-                    <div class="itemCount">
-                      <input type="number" value="<?= $e->count ?>" min="1">
-                      <div>가격: <span class="countTotal"><?= $e->discount ?></span>원</div>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            <?php } ?>
-
+            </div>
           <?php } ?>
-
         <?php } ?>
 
 

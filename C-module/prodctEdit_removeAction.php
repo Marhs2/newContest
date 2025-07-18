@@ -29,11 +29,13 @@ if ($isAdd == "add") {
   }
 
   $img = $_FILES["img"];
-
   $title = $_POST["title"];
   $des = $_POST["des"];
   $price = $_POST["price"];
   $discount = $_POST["discount"];
+
+  $pop = $_POST["isPop"];
+
 
   // if ($img["error"] == 0) {
   //   $imgPath = "./asset/A-Module/images/$cate/$idx.PNG";
@@ -43,24 +45,26 @@ if ($isAdd == "add") {
   $uploadDir = "./asset/A-Module/images/else/";
 
 
+
   if (isset($img) && $img["error"] == 0) {
     move_uploaded_file($img["tmp_name"], $uploadDir . $img["name"]);
     $imgName = $img["name"];
     if (isset($imgCheck)) {
       echo "1번쨰";
-      DB::exec("update prodcut set title = '$title', des = '$des', img = '$imgName', price = '$price', discount = '$discount' where img='$imgCheck'");
+      DB::exec("update prodcut set title = '$title', des = '$des', img = '$imgName', price = '$price', discount = '$discount' , isPopular = '$pop' where img='$imgCheck'");
     } else {
       echo "2번쨰";
-      DB::exec("update prodcut set title = '$title', des = '$des', img = '$imgName', price = '$price', discount = '$discount' where cate = '$cate' and itemNum = '$idx'");
+      DB::exec("update prodcut set title = '$title', des = '$des', img = '$imgName', price = '$price', discount = '$discount' , isPopular = '$pop' where cate = '$cate' and itemNum = '$idx'");
     }
   } else {
     if (isset($imgCheck) && $imgCheck != null) {
       echo "3번쨰";
-      DB::exec("update prodcut set title = '$title', des = '$des', price = '$price', discount = '$discount' where img = '$imgCheck'");
+      DB::exec("update prodcut set title = '$title', des = '$des', price = '$price', discount = '$discount' , isPopular = '$pop' where img = '$imgCheck' ");
     } else {
       echo "4번쨰";
-      DB::exec("update prodcut set title = '$title', des = '$des', price = '$price', discount = '$discount' where cate = '$cate' and itemNum = '$idx'");
+      DB::exec("update prodcut set title = '$title', des = '$des', price = '$price', discount = '$discount'  , isPopular = '$pop'where cate = '$cate' and itemNum = '$idx'");
     }
   }
 }
+
 header("Location: ./prodcutAdmin.php");

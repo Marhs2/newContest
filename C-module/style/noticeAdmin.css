@@ -3,15 +3,25 @@ table {
   vertical-align: top;
   vertical-align: bottom;
   vertical-align: middle;
-  margin: 0 auto;
+  margin: 50px auto;
+  text-align: center;
+  border: 1px solid #acacac;
 }
 
 td {
-  padding: 5px;
+  height: 100px;
+  width: 300px;
+  border-bottom: 1px solid #afafaf;
+}
+
+thead tr {
+  border-bottom: 3px solid rgb(177, 177, 177);
+  height: 50px;
 }
 
 tr td:nth-child(5) {
   cursor: pointer;
+  height: 50px;
 }
 
 td > span {
@@ -22,19 +32,17 @@ td > span {
   display: block;
 }
 
+tfoot th {
+  height: 50px;
+  background-color: #ffc500;
+}
+
 .item-des {
   width: 200px;
   overflow: hidden;
   text-overflow: ellipsis;
   word-break: keep-all;
   white-space: nowrap;
-}
-
-.discount {
-  display: flex;
-  gap: 5px;
-  width: 300px;
-  justify-content: space-around;
 }
 
 .edit {
@@ -46,4 +54,12 @@ td > span {
 
 .edit [class*="item-"] {
   width: 500px;
+}
+
+.item-content {
+  width: 300px;
+}
+
+.item-price {
+  text-align: center;
 }

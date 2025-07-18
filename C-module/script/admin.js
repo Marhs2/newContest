@@ -143,3 +143,17 @@ imgPreview();
 function productAdd() {
   location.href = `../prodctAdd.php?isAdd=add`;
 }
+
+function ifChange() {
+  const discount = document.querySelector(".discount")
+  if (document.getElementById("isPop").checked) {
+    discount.style.display = "flex"
+  } else {
+    discount.style.display = "none"
+    Array.from(discount.children).forEach((e) => {
+      e.checked = false
+      console.log(e.checked)
+    })
+  }
+
+}

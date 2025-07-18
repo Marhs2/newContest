@@ -139,12 +139,13 @@ $notice = DB::fetchAll("select * from notice");
     </nav>
   </header>
 
-  <table border="2" scope="col" class="noticeContainer">
+  <table scope="col" class="noticeContainer">
     <thead>
       <tr>
         <th>종류</th>
         <th>제목</th>
         <th>날짜</th>
+        <th>관리</th>
       </tr>
 
     </thead>
@@ -155,8 +156,9 @@ $notice = DB::fetchAll("select * from notice");
           <td><?= $value->type ?> </td>
           <td><?= $value->title ?></td>
           <td><?= $value->date ?></td>
-          <td><a href="./noticeEdit_Add.php?idx=<?= $value->idx ?>&type=edit">수정</a> </td>
-          <td class="del" onclick="del(this)">삭제</td>
+          <td><a href="./noticeEdit_Add.php?idx=<?= $value->idx ?>&type=edit">수정</a>
+            <span style="display: inline;" class="del" onclick="del(this)">삭제</span>
+          </td>
 
         </tr>
       <?php } ?>

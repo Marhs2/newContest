@@ -5,12 +5,13 @@ require_once "db.php";
 if ($_GET["img"] ?? false) {
   $img = $_GET["img"];
   $product = DB::fetch("select * from prodcut where img = '$img'");
+  $isPop = DB::fetch("select * from prodcut where img = '$img' and isPopular = 'on'");
 } else {
   $cate = $_GET["cate"];
   $idx = $_GET["idx"];
   $product = DB::fetch("select * from prodcut where cate = '$cate' and itemNum = '$idx'");
+  $isPop = DB::fetch("select * from prodcut where cate = '$cate' and isPopular = 'on'");
 }
-
 
 
 
@@ -31,7 +32,7 @@ if ($_GET["img"] ?? false) {
   <link rel="stylesheet" href="./style/main.css">
   <link rel="stylesheet" href="./style/sub02.css">
   <link rel="stylesheet" href="./style/noticeAdmin.css">
-    <link rel="stylesheet" href="./style/prodcutAdmin.css">
+  <link rel="stylesheet" href="./style/prodcutAdmin.css">
 
   <link rel="stylesheet" href="../asset/공통/fontawesome/css/font-awesome.min.css">
 
@@ -196,14 +197,42 @@ if ($_GET["img"] ?? false) {
         <input type="text" name="price" value="<?= $product->price ?>">
       </div>
 
-      <div class="discount">
-        <input type="radio" name="discount" id="won" value="1" <?= $product->discount == 1 ? "checked" : "" ?>>
-        <label for="won">만원할인</label>
-        <input type="radio" name="discount" id="ten" value="2" <?= $product->discount == 2 ? "checked" : "" ?>>
-        <label for="ten">10% 할인</label>
-        <input type="radio" name="discount" id="three" value="3" <?= $product->discount == 3 ? "checked" : "" ?>>
-        <label for="three">30% 할인</label>
-      </div>
+
+      <?php if ($product->isPopular == "1" ||  $product->isPopular == "on") { ?>
+
+        <div class="isPop">
+          <label for="isPop">인기 상품 선택</label>
+          <input type="checkbox" name="isPop" id="isPop" style="margin: 10px; width: 20px; height: 20px;" onclick="ifChange()" <?= $product->isPopular == "on" ? "checked" : "" ?>>
+        </div>
+
+        <div class="discount">
+          <input type="radio" name="discount" id="won" value="1" <?= $product->discount == 1 ? "checked" : "" ?>>
+          <label for="won">만원할인</label>
+          <input type="radio" name="discount" id="ten" value="2" <?= $product->discount == 2 ? "checked" : "" ?>>
+          <label for="ten">10% 할인</label>
+          <input type="radio" name="discount" id="three" value="3" <?= $product->discount == 3 ? "checked" : "" ?>>
+          <label for="three">30% 할인</label>
+        </div>
+
+      <?php } else if ($isPop == false) { ?>
+
+        <div class="isPop">
+          <label for="isPop">인기 상품 선택</label>
+          <input type="checkbox" name="isPop" id="isPop" style="margin: 10px; width: 20px; height: 20px;" onclick="ifChange()">
+        </div>
+
+        <div class="discount" style="display: none;">
+          <input type="radio" name="discount" id="won" value="1">
+          <label for="won">만원할인</label>
+          <input type="radio" name="discount" id="ten" value="2">
+          <label for="ten">10% 할인</label>
+          <input type="radio" name="discount" id="three" value="3">
+          <label for="three">30% 할인</label>
+        </div>
+
+      <?php } else { ?>
+
+      <?php } ?>
       <input type="submit" value="수정">
     </form>
 

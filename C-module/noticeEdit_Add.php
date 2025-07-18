@@ -36,50 +36,93 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["add"] == "add") {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <style>
-    table {
-      border-collapse: collapse;
-      vertical-align: top;
-      vertical-align: bottom;
-      vertical-align: middle;
-    }
-
-    td {
-      padding: 5px;
-    }
-
-    input[name="title"] {
-      min-width: 400px;
-    }
-  </style>
+  <link rel="stylesheet" href="./style/main.css">
+  <link rel="stylesheet" href="./style/noticeAdd.css">
 </head>
 
 <body>
   <?php if ($getType == "edit") { ?>
     <form method="post">
-      <select name="type" required>
-        <option value="일반" <?= $notice->type == "일반" ? "selected" : "" ?>>일반</option>
-        <option value="이벤트" <?= $notice->type == "이벤트" ? "selected"  : "" ?>>이벤트</option>
-      </select>
-      <input type="text" name="title" value="<?= $notice->title ?>" required>
-      <input type="date" name="date" value="<?= $notice->date ?>" required>
-      <input type="submit" value="수정">
+      <div class="container">
+        <div>
+          <h1>공지사황 수정</h1>
+        </div>
+        <div>
+          <div>
+            <label for="type">종류</label>
+            <select name="type" id="type" required>
+              <option value="일반" <?= $notice->type == "일반" ? "selected" : "" ?>>일반</option>
+              <option value="이벤트" <?= $notice->type == "이벤트" ? "selected"  : "" ?>>이벤트</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="title">제목</label>
+            <input type="text" id="title" name="title" value="<?= $notice->title ?>" required>
+          </div>
+          <div>
+            <label for="date">날짜</label>
+            <input type="date" name="date" id="date" value="<?= $notice->date ?>" required>
+
+          </div>
+
+          <div>
+            <input type="submit" value="수정">
+          </div>
+
+
+        </div>
+
+
+
+      </div>
     </form>
+
 
 
 
   <?php } else { ?>
 
+
+
     <form method="post">
-      <input type="hidden" name="add" value="add">
-      <select name="type" required>
-        <option value="일반">일반</option>
-        <option value="이벤트">이벤트</option>
-      </select>
-      <input type="text" name="title" required>
-      <input type="date" name="date" required>
-      <input type="submit" value="추가">
+      <input type="hidden" name="add" value="add" style="display: none;">
+
+      <div class="container">
+        <div>
+          <h1>공지사황 추가</h1>
+        </div>
+        <div>
+          <div>
+            <label for="type">종류</label>
+            <select name="type" id="type" required>
+              <option value="일반">일반</option>
+              <option value="이벤트">이벤트</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="title">제목</label>
+            <input type="text" id="title" name="title" required>
+          </div>
+          <div>
+            <label for="date">날짜</label>
+            <input type="date" name="date" id="date" required>
+
+          </div>
+
+          <div>
+            <input type="submit" value="추가">
+          </div>
+
+
+        </div>
+
+
+
+      </div>
     </form>
+
 
 
 

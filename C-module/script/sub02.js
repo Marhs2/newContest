@@ -346,18 +346,7 @@ function addDbCart() {
 
     e.addEventListener('click', (event) => {
       const data = new URLSearchParams();
-      data.append("id", "1")
-      data.append("item-cate", event.target.closest(".item").getAttribute('data-cate'))
-      data.append("item-id", event.target.closest(".item").getAttribute('data-idx'))
-      data.append("title", event.target.closest(".item").querySelector('.item-title').textContent.replace(/["상품명: "]/g, ""))
-      data.append("price", event.target.closest(".item").querySelector('.item-price span').textContent)
-      if (event.target.closest(".item").querySelector('.discount')) {
-        data.append("discount", event.target.closest(".item").querySelector('.discount').textContent)
-      } else {
-        data.append("discount", "0")
-
-      }
-
+      data.append("idx", event.target.closest(".item").getAttribute('data-idx'))
 
       fetch('../addCart.php', {
         method: "post",

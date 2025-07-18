@@ -11,6 +11,7 @@ $notice = DB::fetchAll("select * from notice");
   <title>Document</title>
   <link rel="stylesheet" href="./style/index.css" />
   <link rel="stylesheet" href="./style/main.css" />
+  <link rel="stylesheet" href="./style/slide.css" />
   <link rel="stylesheet" href="../asset/공통/fontawesome/css/font-awesome.min.css">
 </head>
 
@@ -23,16 +24,20 @@ $notice = DB::fetchAll("select * from notice");
       <form action="singupAction.php" method="post">
         <table>
           <tr>
-            <td><label for="id">아이디</label> <input type="text" name="id" id="id" required></td>
+            <td><label for="id">아이디</label></td>
+            <td class="loginBo"> <i class="fa fa-user"></i> <input type="text" name="id" id="id" required></td>
           </tr>
           <tr>
-            <td><label for="psw">비밀번호</label> <input type="password" name="psw" id="psw" required></td>
+            <td><label for="psw">비밀번호</label></td>
+            <td class="loginBo"> <i class="fa fa-lock"></i><input type="password" name="psw" id="psw" required></td>
           </tr>
           <tr>
-            <td><label for="name">이름</label> <input type="text" name="name" id="name" required></td>
+            <td><label for="name">이름</label> </td>
+            <td class="loginBo"><i class="fa fa-user"></i><input type="text" name="name" id="name" required></td>
           </tr>
           <tr>
-            <td><label for="email">이메일</label> <input type="email" name="email" id="email" required></td>
+            <td><label for="email">이메일</label></td>
+            <td class="loginBo"><i class="fa fa-envelope-o"></i><input type="email" name="email" id="email" required></td>
           </tr>
           <tr>
             <td><input type="submit" value="회원가입"></td>
@@ -53,10 +58,13 @@ $notice = DB::fetchAll("select * from notice");
       <form action="loginAction.php" method="post">
         <table>
           <tr>
-            <td><label for="id">아이디</label> <input type="text" name="loginId" id="id" required></td>
+            <td><label for="id">아이디</label> </td>
+            <td class="loginBo"><i class="fa fa-user"></i><input type="text" name="loginId" id="id" placeholder="아이디" required></td>
           </tr>
           <tr>
-            <td><label for="psw">비밀번호</label> <input type="password" name="loginPsw" id="psw" required></td>
+            <td><label for="psw">비밀번호</label> </td>
+            <td class="loginBo"><i class="fa fa-lock"></i> <input type="password" name="loginPsw" id="psw" placeholder="비밀번호" required>
+            </td>
           </tr>
 
           <tr>
@@ -134,8 +142,25 @@ $notice = DB::fetchAll("select * from notice");
   </header>
 
   <div class="slide">
-    <input type="radio" id="left01" name="slide" />
-    <input type="radio" id="right01" name="slide" />
+    <input type="radio" name="slide" id="f1t3-1">
+    <input type="radio" name="slide" id="f1t2-1" checked>
+    <input type="radio" name="slide" id="f1t3-2">
+    <input type="radio" name="slide" id="f1t3-2">
+
+    <input type="radio" name="slide" id="f2t1-1">
+    <input type="radio" name="slide" id="f2t3-1">
+    <input type="radio" name="slide" id="f2t1-2">
+    <input type="radio" name="slide" id="f2t3-2">
+
+    <input type="radio" name="slide" id="f3t2-1">
+    <input type="radio" name="slide" id="f3t4-1">
+    <input type="radio" name="slide" id="f3t2-2">
+    <input type="radio" name="slide" id="f3t4-2">
+
+    <input type="radio" name="slide" id="f4t3-1">
+    <input type="radio" name="slide" id="f4t2-1">
+    <input type="radio" name="slide" id="f4t3-2">
+    <input type="radio" name="slide" id="f4t2-2">
 
     <ul>
       <li class="slide01">
@@ -151,8 +176,10 @@ $notice = DB::fetchAll("select * from notice");
             전 세계 고객에게 선물의 가치를 높입니다.
           </div>
           <div class="slideBtn">
-            <label for="left01">&lt;</label>
-            <label for="right01">&gt;</label>
+            <label for="f1t3-1">&lt;</label>
+            <label for="f1t2-1">&gt;</label>
+            <label for="f1t3-2">&lt;</label>
+            <label for="f1t3-2">&gt;</label>
           </div>
         </div>
       </li>
@@ -169,8 +196,10 @@ $notice = DB::fetchAll("select * from notice");
             고객에게 다양한 즐거움을 선물합니다.
           </div>
           <div class="slideBtn">
-            <label class="left">&lt;</label>
-            <label class="right">&gt;</label>
+            <label for="f2t1-1">&lt;</label>
+            <label for="f2t3-1">&gt;</label>
+            <label for="f2t1-2">&lt;</label>
+            <label for="f2t3-2">&gt;</label>
           </div>
         </div>
       </li>
@@ -187,8 +216,10 @@ $notice = DB::fetchAll("select * from notice");
             전 세계 고객에게 선물의 가치를 높입니다.
           </div>
           <div class="slideBtn">
-            <label class="left">&lt;</label>
-            <label class="right">&gt;</label>
+            <label for="f3t2-1">&lt;</label>
+            <label for="f3t4-1">&gt;</label>
+            <label for="f3t2-2">&lt;</label>
+            <label for="f3t4-2">&gt;</label>
           </div>
         </div>
       </li>
@@ -205,8 +236,10 @@ $notice = DB::fetchAll("select * from notice");
             전 세계 고객에게 선물의 가치를 높입니다.
           </div>
           <div class="slideBtn">
-            <label class="left">&lt;</label>
-            <label class="right">&gt;</label>
+            <label for="f4t3-1">&lt;</label>
+            <label for="f4t2-1">&gt;</label>
+            <label for="f4t3-2">&lt;;</label>
+            <label for="f4t2-2">&gt;</label>
           </div>
         </div>
       </li>

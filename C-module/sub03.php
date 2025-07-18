@@ -1,5 +1,7 @@
 <?php require_once "db.php";
 
+$itemPop = DB::fetchAll("select * from prodcut where isPopular = 'on'");
+
 
 
 ?>
@@ -81,124 +83,44 @@
     <div class="all-container">
       <div class="title">ALL PRODCUTS</div>
       <div class="prodcuts-container">
-        <div class="items">
-          <div class="item">
-            <div class="img-cover">
-              <img src="../asset/A-Module/images/건강식품/1.PNG" alt="" />
-            </div>
+        <?php if (isset($_SESSION["ss"]->id) || isset($_SESSION["ss"])) { ?>
+          <?php foreach ($itemPop as $key) {
 
-            <div class="item-content">
-              <div class="item-title">상품명: 이뮨 멀티비타민&amp;미네랄</div>
-              <div class="item-about">
-                <div class="item-price">
-                  가격:
-                  <span style="text-decoration: line-through">75,000</span>
-                  -&gt; <span class="discount">65,000</span>
+            $discount = $key->discount;
+
+
+            if ($discount == "1") {
+              $discount = $key->price - 10000;
+            } else if ($discount == "2") {
+              $discount = $key->price * 0.90;
+            } else if ($discount == "3") {
+              $discount = $key->price * 0.70;
+            }
+          ?>
+
+            <div class="item" data-id="<?= $key->idx ?>">
+              <div class="img-cover">
+                <img src="../asset/A-Module/images/<?= ($key->img == null ? $key->cate . "/" . $key->itemNum . ".PNG" : "else/" . $key->img) ?>" alt="">
+              </div>
+
+              <div class="item-content">
+                <div class="item-title"><?= $key->title  ?></div>
+                <div class="item-about">
+
+                  <div class="item-price">가격: <span style="text-decoration: line-through;"><?= number_format($key->price, 0, ".", ",") ?></span> -&gt; <span class="price"><?= number_format($discount, 0, ".", ",") ?></span> </div>
+
+
                 </div>
                 <div class="item-btn">
                   <a href="#">구매하기</a>
-                  <a href="#">장바구니담기</a>
+                  <span>장바구니담기</span>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-        <div class="items">
-          <div class="item">
-            <div class="img-cover">
-              <img src="../asset/A-Module/images/디지털/4.PNG" alt="" />
-            </div>
 
-            <div class="item-content">
-              <div class="item-title">
-                상품명: 파이널마우스 스타라이트12 페가수스 미디엄
-              </div>
-              <div class="item-about">
-                <div class="item-price" style="font-size: 16px">
-                  가격:
-                  <span style="text-decoration: line-through">1,254,000</span>
-                  -&gt; <span class="discount">1,128,600</span>
-                </div>
-                <div class="item-btn">
-                  <a href="#">구매하기</a>
-                  <a href="#">장바구니담기</a>
-                </div>
-              </div>
             </div>
-          </div>
+          <?php } ?>
+        <?php } ?>
 
-        </div>
-        <div class="items">
-          <div class="item">
-            <div class="img-cover">
-              <img src="../asset/A-Module/images/팬시/4.PNG" alt="" />
-            </div>
-
-            <div class="item-content">
-              <div class="item-title">상품명: 게이밍 이어폰 VJJB NI</div>
-              <div class="item-about">
-                <div class="item-price">
-                  가격:
-                  <span style="text-decoration: line-through">38,900</span>
-                  -&gt; <span class="discount">28,900</span>
-                </div>
-                <div class="item-btn">
-                  <a href="#">구매하기</a>
-                  <a href="#">장바구니담기</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-        <div class="items">
-          <div class="item">
-            <div class="img-cover">
-              <img src="../asset/A-Module/images/향수/4.PNG" alt="" />
-            </div>
-
-            <div class="item-content">
-              <div class="item-title">상품명: 몽블랑 익스플로러 EDP 60ml</div>
-              <div class="item-about">
-                <div class="item-price">
-                  가격:
-                  <span style="text-decoration: line-through">103,000</span>
-                  -&gt; <span class="discount">93,000</span>
-                </div>
-                <div class="item-btn">
-                  <a href="#">구매하기</a>
-                  <a href="#">장바구니담기</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-        <div class="items">
-          <div class="item">
-            <div class="img-cover">
-              <img src="../asset/A-Module/images/헤어케어/5.PNG" alt="" />
-            </div>
-
-            <div class="item-content">
-              <div class="item-title">
-                상품명: 닥터포헤어 피토프레시 헤어쿨링 스프레이 150ml
-              </div>
-              <div class="item-about">
-                <div class="item-price">
-                  가격:
-                  <span style="text-decoration: line-through">16,000</span>
-                  -&gt; <span class="discount">14,400</span>
-                </div>
-                <div class="item-btn">
-                  <a href="#">구매하기</a>
-                  <a href="#">장바구니담기</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
       </div>
     </div>
   </main>
@@ -254,6 +176,34 @@
       </div>
     </div>
   </footer>
+  <script>
+    function addDbCart() {
+      [...document.querySelectorAll(".item-btn span")].forEach((e) => {
+
+        e.addEventListener('click', (event) => {
+          const data = new URLSearchParams();
+          data.append("idx", event.target.closest(".item").getAttribute('data-idx'))
+
+          fetch('../addCart.php', {
+              method: "post",
+              body: data
+            })
+            .then(res => res.json())
+
+            .then(data =>
+              alert(data)
+            )
+
+
+        })
+
+      })
+
+    }
+
+    addDbCart()
+  </script>
+
 </body>
 
 </html>
